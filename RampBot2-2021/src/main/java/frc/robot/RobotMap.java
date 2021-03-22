@@ -23,20 +23,23 @@ public class RobotMap {
 	public static int mtrRearRight = 3;
 	public static int mtrRearLeft = 4;	
 	*/
+	public static int backLeftDrive = 1;
+	public static int midLeftDrive = 2;
+	public static int frontLeftDrive = 3;
+
+	public static int backRightDrive = 4;
+	public static int midRightDrive = 5;
+	public static int frontRightDrive = 6;
 
 	// the following are CAN addresses for the SparkMAX
-	public static int mtrFrontLeft = 11;
-	public static int mtrFrontRight = 12;
-	public static int mtrRearLeft  = 13;
+	public static int shooter1 = 11;
+	public static int conveyor = 12;
+	public static int shooter2  = 13;
 	public static int mtrRearRight = 14;	
 	
 
 	// the following are CAN addresses for the Spark's	 
-	public static int mtrLift  = 1;	
-	public static int mtrClimb = 2;
-	public static int mtrTransfer  = 3;
-	public static int  mtrVaccum = 4;
-	public static int mtrRamp = 5; // Lets down the ramp
+	
 
 	// PWM
 	public static int  mtrHatch = 0;
@@ -75,22 +78,9 @@ public class RobotMap {
 	
 	
 	// Encoder map
-	public static int liftEncoderA = 0;
-	public static int liftEncoderB = 1;	
+	public static int leftEncoder = 21;
+	public static int rightEncoder = 22;	
 		
-	// Limit switches
-	public static int ls_transferForward = 3;
-	public static int ls_transferBack = 4;
-
-	public static int ls_liftDown = 2;
-	
-	
-	public static int us_LeftDist = 0;
-	public static int us_RightDist = 1;
-	
-	
-	public static int pwmHatchPosition = 5;
-	public static int pwmRangeTrigger = 6;
 	
 
 }

@@ -34,18 +34,18 @@ public class Lift extends PIDSubsystem {
 	private static final double pulses_per_revolution = 500;
 	private static final double motor_up_direction = -1;
 	
-	private WPI_TalonSRX motorLift = new WPI_TalonSRX(RobotMap.mtrLift);  
+	private WPI_TalonSRX motorLift = new WPI_TalonSRX(50);  
 	
   
 
 		
-    private Encoder m_LiftEncoder = new Encoder(RobotMap.liftEncoderA,RobotMap.liftEncoderB);
+    //private Encoder m_LiftEncoder = new Encoder(RobotMap.left,RobotMap.liftEncoderB);
      
     // Limit switches
     //public DigitalInput m_lsTop = new DigitalInput(RobotMap.ls_liftUp);
-	public DigitalInput m_lsBottom = new DigitalInput(RobotMap.ls_liftDown);
-	public DigitalOutput m_hatchPWM = new DigitalOutput(RobotMap.pwmHatchPosition);
-    public DigitalOutput m_SensorTrigger = new DigitalOutput(RobotMap.pwmRangeTrigger);
+	//public DigitalInput m_lsBottom = new DigitalInput(RobotMap.ls_liftDown);
+	//public DigitalOutput m_hatchPWM = new DigitalOutput(RobotMap.pwmHatchPosition);
+    //public DigitalOutput m_SensorTrigger = new DigitalOutput(RobotMap.pwmRangeTrigger);
 	
 	
 
@@ -72,14 +72,14 @@ public class Lift extends PIDSubsystem {
 		*/
 		
 		//m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);   // 4.88 mm per turn of the shaft / pulses per turn
-		m_LiftEncoder.setDistancePerPulse(0.012058 * 25.4);   // 4.88 mm per turn of the shaft / pulses per turn
+		//m_LiftEncoder.setDistancePerPulse(0.012058 * 25.4);   // 4.88 mm per turn of the shaft / pulses per turn
 		
 		
-		m_hatchPWM.setPWMRate(1000);
-		m_hatchPWM.enablePWM(0.5);
+		//.setPWMRate(1000);
+		//m_hatchPWM.enablePWM(0.5);
 
-		m_SensorTrigger.setPWMRate(1000);
-		m_hatchPWM.enablePWM(0.5);
+		//m_SensorTrigger.setPWMRate(1000);
+		//m_hatchPWM.enablePWM(0.5);
 
 
 		setAbsoluteTolerance(0.05); // MM
@@ -88,7 +88,7 @@ public class Lift extends PIDSubsystem {
 		// Let's name everything on the LiveWindow
 		addChild("Lift Motor", motorLift);
 		
-		addChild("Lift Encoder", m_LiftEncoder);
+		//("Lift Encoder", m_LiftEncoder);
 
 	}
 	
@@ -101,11 +101,12 @@ public class Lift extends PIDSubsystem {
     }
     
     public void log() {
-    	SmartDashboard.putNumber("Lift Speed", m_LiftEncoder.getRate());
+    	/*SmartDashboard.putNumber("Lift Speed", .getRate());
     	SmartDashboard.putNumber("Lift Position", this.getPosition());
     	SmartDashboard.putNumber("Lift Distance", m_LiftEncoder.getDistance());
     	SmartDashboard.putNumber("Lift dpp", m_LiftEncoder.getDistancePerPulse());
-    	
+		*/
+		
     	// Because things that are put in the SmartDashboard through putData() have no 
 //    	SmartDashboard.putData("Lift Motor", motorLift);
 //    	SmartDashboard.putData("Lift Encoder", m_LiftEncoder);
@@ -118,13 +119,13 @@ public class Lift extends PIDSubsystem {
     	
     	// Let's name everything on the LiveWindow
 		addChild("Lift Motor", motorLift);		
-    	addChild("Lift Encoder", m_LiftEncoder);
+    	//addChild("Lift Encoder", m_LiftEncoder);
 	}
     
     
     public void Reset()
     {
-    	m_LiftEncoder.reset();
+    	//m_LiftEncoder.reset();
     }
     
     
@@ -157,7 +158,8 @@ public class Lift extends PIDSubsystem {
 	 * Return true when the which lift triggers the "bottom" limit switch.
 	 */
 	public boolean isAtBottom() {
-		return  m_lsBottom.get();
+		//return  m_lsBottom.get();
+		return true;
 	}
 	
 	public boolean isClamped() {
@@ -173,7 +175,8 @@ public class Lift extends PIDSubsystem {
 	 */
 	@Override
 	protected double returnPIDInput() {
-		return m_LiftEncoder.getDistance();
+		//return m_LiftEncoder.getDistance();
+		return 0.0;
 	}
 	
 	/**

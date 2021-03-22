@@ -2,23 +2,28 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
+import frc.robot.MotorConfigs;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
 public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
   
-  private WPI_TalonSRX testMotor = new WPI_TalonSRX(RobotMap.mtrLift);
+  private WPI_TalonSRX testMotor = new WPI_TalonSRX(RobotMap.shooter1);
+  private WPI_TalonSRX rightShooter = new WPI_TalonSRX(RobotMap.shooter2);
 
-  private Encoder m_ShootEncoder = new Encoder(RobotMap.liftEncoderA, RobotMap.liftEncoderB);
+  private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(testMotor, rightShooter);
+
+  private Encoder m_ShootEncoder = new Encoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
   
   public Shooter() {
     
     // Configuration for the motor being used
-    testMotor.configContinuousCurrentLimit(40, 0);
-		testMotor.configPeakCurrentLimit(55, 0);
-		testMotor.configPeakCurrentDuration(100, 0);
+    testMotor.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
+		testMotor.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
+		testMotor.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		testMotor.enableCurrentLimit(true);	
     testMotor.configOpenloopRamp(0, 0);
     

@@ -28,10 +28,10 @@ import frc.robot.commands.DriveRobot;
 import frc.robot.commands.TransferToForward;
 //import frc.robot.commands.WinchToOperate;
 import frc.robot.subsystems.Chassis;
-import frc.robot.subsystems.ClimbingCAM;
+
 //import frc.robot.subsystems.Gripper;
 import frc.robot.subsystems.Lift;
-import frc.robot.subsystems.Vacuum;
+
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Conveyor;
 
@@ -80,8 +80,7 @@ public class Robot extends TimedRobot {
 	// create our assemblies..
 	public static Chassis m_Chassis;
 	public static Lift m_Lift;
-	public static ClimbingCAM m_CAM;
-	public static Vacuum m_VAC;
+
 	public static Shooter m_Shoot;
 	public static OI m_oi;
 	public static Conveyor m_Conveyor;
@@ -104,9 +103,9 @@ public class Robot extends TimedRobot {
 		//ultra.setAutomaticMode(true);
 		m_Chassis = new Chassis();
 		
-		m_Lift = new Lift();
-		m_CAM = new ClimbingCAM();		
-		m_VAC = new Vacuum();
+		//m_Lift = new Lift();
+		//m_CAM = new ClimbingCAM();		
+		//m_VAC = new Vacuum();
 		m_Shoot = new Shooter();
 		m_Conveyor = new Conveyor();
 
@@ -254,7 +253,6 @@ public class Robot extends TimedRobot {
 	private void log() {
 		m_Chassis.log();
 		m_Lift.log();
-		m_CAM.log();
-		m_VAC.log();
+
 	}
 }

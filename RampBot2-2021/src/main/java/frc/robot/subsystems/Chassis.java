@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 
 
 //import com.analog.adis16448.frc.ADIS16448_IMU;
-import frc.robot.subsystems.TransferTable;
+
 //import jdk.internal.jshell.tool.resources.l10n;
 
 
@@ -49,14 +49,14 @@ public class Chassis extends Subsystem {
 	
 	// Main Movement Drive 
 	
-	WPI_TalonSRX motorFrontLeft = new WPI_TalonSRX(1);
-	WPI_TalonSRX motorMidLeft = new WPI_TalonSRX(2);
-	WPI_TalonSRX motorRearLeft = new WPI_TalonSRX(3);
+	WPI_TalonSRX motorFrontLeft = new WPI_TalonSRX(RobotMap.frontLeftDrive);
+	WPI_TalonSRX motorMidLeft = new WPI_TalonSRX(RobotMap.midLeftDrive);
+	WPI_TalonSRX motorRearLeft = new WPI_TalonSRX(RobotMap.backLeftDrive);
 	SpeedControllerGroup m_left = new SpeedControllerGroup(motorFrontLeft, motorMidLeft, motorRearLeft);
 
-	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(4);
-	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(5);
-	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(6);
+	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(RobotMap.frontRightDrive);
+	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midLeftDrive);
+	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(RobotMap.backRightDrive);
 	SpeedControllerGroup m_right = new SpeedControllerGroup(motorFrontRight, motorMidRight, motorRearRight);
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
@@ -66,8 +66,8 @@ public class Chassis extends Subsystem {
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
     
 	
-	AnalogInput  LeftDistance = new AnalogInput(RobotMap.us_LeftDist);
-	AnalogInput  RightDistance = new AnalogInput(RobotMap.us_RightDist);
+	AnalogInput  LeftDistance = new AnalogInput(0);
+	AnalogInput  RightDistance = new AnalogInput(0);
 
     
     
@@ -137,7 +137,7 @@ public class Chassis extends Subsystem {
     	
     	// put class variables we want to see on dashboard or capture here
     	
-    	
+    	/*
     	SmartDashboard.putNumber("FL", -1 * motorFrontLeft.get());
     	SmartDashboard.putNumber("FR", motorFrontRight.get());
     	SmartDashboard.putNumber("RL", -1 * motorRearLeft.get());
@@ -145,7 +145,7 @@ public class Chassis extends Subsystem {
 
 		SmartDashboard.putNumber("Path Segment: ", segment);
 		SmartDashboard.putNumber("Path percent: ", percent);
-		SmartDashboard.putNumber("Path timer: ", tick);
+		SmartDashboard.putNumber("Path timer: ", tick);*/
 
 		/*
 		SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
