@@ -1,12 +1,12 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
-public class Shooter extends SubsystemBase {
+public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
   
   private WPI_TalonSRX testMotor = new WPI_TalonSRX(RobotMap.mtrLift);
@@ -39,8 +39,9 @@ public class Shooter extends SubsystemBase {
   }
 
   @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+  public void initDefaultCommand()
+  {
+    // Nothing here right now.  Needed to compile the code
   }
 
   public void SpinMotors(int time)

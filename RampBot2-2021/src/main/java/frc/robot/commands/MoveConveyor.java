@@ -4,18 +4,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Conveyor;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class Shoot extends Command {
+public class MoveConveyor extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-
   //Constructor for the command
-  public Shoot() {
-    requires(Robot.m_Shoot);
+  public MoveConveyor() {
+    requires(Robot.m_Conveyor);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +24,13 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_Shoot.SpinMotors(3);
+    Robot.m_Conveyor.LiftBall(0.1);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    Robot.m_Shoot.stop();
+    Robot.m_Conveyor.stop();
   }
 
   // Returns true when the command should end.
