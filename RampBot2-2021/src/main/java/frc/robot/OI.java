@@ -8,18 +8,19 @@
 package frc.robot;
 
 import frc.robot.commands.TransferToForward;
-import frc.robot.commands.VacuumOn;
+
 import frc.robot.commands.TransferToBack;
-import frc.robot.commands.Climb;
+
 import frc.robot.commands.LiftDown;
 import frc.robot.commands.LiftSwitch;
+import frc.robot.commands.MoveConveyor;
 //import frc.robot.commands.TestSequencer;
 import frc.robot.commands.LiftScale;
 //import frc.robot.commands.LiftSetpoint;
 import frc.robot.commands.LiftHook;
 import frc.robot.commands.LiftManualMove;
 import frc.robot.commands.LiftRobot;   // same as lift down, but may be partial
-import frc.robot.commands.ClimbBack;
+
 import frc.robot.commands.HatchClose;
 import frc.robot.commands.HatchOpen;
 import frc.robot.commands.Shoot;
@@ -89,17 +90,17 @@ public class OI {
 	
 	public OI() {
 		// Put our operations buttons on the SmartDashboard
-		
+		/*
 		SmartDashboard.putData("Transfer to Forward", new TransferToBack());
 		SmartDashboard.putData("Transfer to Back", new TransferToForward());
-	
+		*/
 		
-		SmartDashboard.putData("Lift Down", new LiftDown());
-		SmartDashboard.putData("Lift Switch", new LiftSwitch());
-		SmartDashboard.putData("Lift Scale", new LiftScale());
-		SmartDashboard.putData("Lift Hook", new LiftHook());
-		SmartDashboard.putData("Lift Robot", new LiftRobot());
-		SmartDashboard.putData("Vacuum", new VacuumOn());
+		//SmartDashboard.putData("Lift Down", new LiftDown());
+		//SmartDashboard.putData("Lift Switch", new LiftSwitch());
+		//SmartDashboard.putData("Lift Scale", new LiftScale());
+		//SmartDashboard.putData("Lift Hook", new LiftHook());
+		//SmartDashboard.putData("Lift Robot", new LiftRobot());
+
 		
 		// BUTTON MAPPINGS
 		trigger = new JoystickButton(m_joystick, 1);
@@ -136,10 +137,10 @@ public class OI {
 		//button5.whileHeld(new HatchClose());
 		//button3.whileHeld(new HatchOpen());
 
-		bButton.whileHeld(new TransferToBack());
-		aButton.whileHeld(new TransferToForward());
+		//bButton.whileHeld(new TransferToBack());
+		//aButton.whileHeld(new TransferToForward());
 		
-		button10.whileHeld(new Shoot());
+		button10.whileHeld(new MoveConveyor());
 
 		/*
 		liftManualDown.whileHeld(new LiftManualMove(-1, 0.5));
@@ -152,8 +153,8 @@ public class OI {
 		//button9.whenPressed(new LiftSwitch());
 
 		//button10.whenPressed(new LiftScale());
-		leftTrigger.whileHeld(new LiftManualMove(1,0.5));
-		rightTrigger.whileHeld(new LiftManualMove(1,-0.5));
+		//leftTrigger.whileHeld(new LiftManualMove(1,0.5));
+		//rightTrigger.whileHeld(new LiftManualMove(1,-0.5));
 		
 	}
 	
