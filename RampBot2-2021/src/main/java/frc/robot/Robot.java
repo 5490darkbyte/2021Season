@@ -176,7 +176,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		new HatchClose();
+		//new HatchClose();
 		/*
 		m_autonomousCommand = m_chooser.getSelected();
 		
@@ -225,7 +225,7 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
-		new HatchClose();
+		//new HatchClose();
 	}
 
 	/**
@@ -252,7 +252,7 @@ public class Robot extends TimedRobot {
 	 */
 	private void log() {
 		m_Chassis.log();
-		m_Lift.log();
+		//m_Lift.log();
 
 	}
 }

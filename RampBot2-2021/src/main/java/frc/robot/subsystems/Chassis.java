@@ -66,8 +66,8 @@ public class Chassis extends Subsystem {
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
     
 	
-	AnalogInput  LeftDistance = new AnalogInput(0);
-	AnalogInput  RightDistance = new AnalogInput(0);
+	//AnalogInput  LeftDistance = new AnalogInput(0);
+	//AnalogInput  RightDistance = new AnalogInput(0);
 
     
     
@@ -91,14 +91,14 @@ public class Chassis extends Subsystem {
 
 		
 		//int bits;
-		LeftDistance.setOversampleBits(4);
+		//LeftDistance.setOversampleBits(4);
 		//bits = LeftDistance.getOversampleBits();
-		LeftDistance.setAverageBits(2);
+		//LeftDistance.setAverageBits(2);
 		//bits = LeftDistance.getAverageBits();
 
-		RightDistance.setOversampleBits(4);
+		//RightDistance.setOversampleBits(4);
 		//bits = LeftDistance.getOversampleBits();
-		RightDistance.setAverageBits(2);
+		//RightDistance.setAverageBits(2);
 		//bits = LeftDistance.getAverageBits();
 
 
@@ -124,8 +124,8 @@ public class Chassis extends Subsystem {
 		*/
 		
 
-		SmartDashboard.putNumber("Left Distance: ",  LeftDistance.getValue());
-		SmartDashboard.putNumber("Right Distance: ",  RightDistance.getValue());
+		//SmartDashboard.putNumber("Left Distance: ",  LeftDistance.getValue());
+		//SmartDashboard.putNumber("Right Distance: ",  RightDistance.getValue());
 		
 		
 
@@ -186,7 +186,7 @@ public class Chassis extends Subsystem {
 		
 		m_robotDrive.driveCartesian(Xout, Yout, Zout, 0);
 		*/
-
+		speed = 0.1;
 		m_robotDrive.arcadeDrive(speed*driveStick.getY(), speed*driveStick.getX());
 									
 		

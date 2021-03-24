@@ -26,6 +26,14 @@ public class Shooter extends Subsystem {
 		testMotor.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		testMotor.enableCurrentLimit(true);	
     testMotor.configOpenloopRamp(0, 0);
+
+    rightShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
+		rightShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
+		rightShooter.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
+		rightShooter.enableCurrentLimit(true);	
+    rightShooter.configOpenloopRamp(0, 0);
+
+    
     
     // Configuration for the encoders
     //m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);
@@ -51,10 +59,10 @@ public class Shooter extends Subsystem {
 
   public void SpinMotors(int time)
   {
-      testMotor.set(0.1);
+      m_shooterMotors.set(0.1);
   }
   public void stop()
   {
-    testMotor.set(0);
+    m_shooterMotors.set(0);
   }
 }
