@@ -1,13 +1,14 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+
 
 import edu.wpi.first.wpilibj.Servo;
 
+
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Encoder;
 import frc.robot.commands.LiftManualMove;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -55,9 +56,12 @@ public class Chassis extends Subsystem {
 	SpeedControllerGroup m_left = new SpeedControllerGroup(motorFrontLeft, motorMidLeft, motorRearLeft);
 
 	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(RobotMap.frontRightDrive);
-	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midLeftDrive);
+	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midRightDrive);
 	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(RobotMap.backRightDrive);
 	SpeedControllerGroup m_right = new SpeedControllerGroup(motorFrontRight, motorMidRight, motorRearRight);
+
+	Encoder driveEncoders = new Encoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
+	
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
 	
@@ -68,7 +72,7 @@ public class Chassis extends Subsystem {
 	
 	//AnalogInput  LeftDistance = new AnalogInput(0);
 	//AnalogInput  RightDistance = new AnalogInput(0);
-
+	
     
     
     public int segment;
@@ -80,7 +84,9 @@ public class Chassis extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	// see DriveTrain example
-    public void initDefaultCommand() {
+
+	
+	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		
 		    /* factory default values */
@@ -169,6 +175,7 @@ public class Chassis extends Subsystem {
 		*/
 		
 		SmartDashboard.putNumber("Speed: ", speed);
+		SmartDashboard.putNumber("Distance", driveEncoders.getDistance());
 	}
 
 	
@@ -180,15 +187,14 @@ public class Chassis extends Subsystem {
 
 		//m_robotDrive.setDeadband(0.2);
 		
-		
-		
 		/*
 		
 		m_robotDrive.driveCartesian(Xout, Yout, Zout, 0);
 		*/
-		speed = 0.1;
-		m_robotDrive.arcadeDrive(speed*driveStick.getY(), speed*driveStick.getX());
-									
+		
+		
+		m_robotDrive.arcadeDrive(speed*driveStick.getY(), -speed*driveStick.getX());
+							
 		
 		//
 		
@@ -215,6 +221,7 @@ public class Chassis extends Subsystem {
 		
 		
 		m_robotDrive.arcadeDrive(Y*speed, X*speed);
+		
 	}
 
 	

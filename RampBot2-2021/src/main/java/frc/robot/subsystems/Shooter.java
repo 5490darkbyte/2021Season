@@ -16,7 +16,7 @@ public class Shooter extends Subsystem {
 
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(testMotor, rightShooter);
 
-  private Encoder m_ShootEncoder = new Encoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
+  
   
   public Shooter() {
     
@@ -40,7 +40,7 @@ public class Shooter extends Subsystem {
     
       
     addChild("Motor im testing", testMotor);
-    addChild("Encoder being used", m_ShootEncoder);
+    
 
 
 

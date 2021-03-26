@@ -27,6 +27,7 @@ import frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.buttons.Trigger;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -35,14 +36,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 	
-	private Joystick m_joystick = new Joystick(1);
-	private Joystick xbox = new Joystick(0);
+	private Joystick m_joystick = new Joystick(0);
+	private Joystick xbox = new Joystick(1);
 
 	private JoystickButton trigger;
 	private JoystickButton thumb;
 
 	private JoystickButton leftTrigger;
-	private JoystickButton rightTrigger;
+	private Trigger rightTrigger;
 	private JoystickButton aButton;
 	private JoystickButton bButton;
 	// Top buttons (counterclockwise from top left: 5-3-4-6)
@@ -102,6 +103,7 @@ public class OI {
 		//SmartDashboard.putData("Lift Robot", new LiftRobot());
 
 		
+		
 		// BUTTON MAPPINGS
 		trigger = new JoystickButton(m_joystick, 1);
 		thumb = new JoystickButton(m_joystick, 2);
@@ -140,7 +142,10 @@ public class OI {
 		//bButton.whileHeld(new TransferToBack());
 		//aButton.whileHeld(new TransferToForward());
 		
-		button10.whileHeld(new MoveConveyor());
+		aButton.whileHeld(new MoveConveyor(0.45));
+		
+		
+		
 
 		/*
 		liftManualDown.whileHeld(new LiftManualMove(-1, 0.5));

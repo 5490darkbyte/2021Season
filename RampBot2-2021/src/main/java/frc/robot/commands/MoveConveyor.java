@@ -7,14 +7,17 @@ package frc.robot.commands;
 import frc.robot.subsystems.Conveyor;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** An example command that uses an example subsystem. */
 public class MoveConveyor extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
+  double currSpeed;
   //Constructor for the command
-  public MoveConveyor() {
+  public MoveConveyor(double speed) {
     requires(Robot.m_Conveyor);
+    currSpeed = speed;
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +27,9 @@ public class MoveConveyor extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_Conveyor.LiftBall(0.1);
+    
+    Robot.m_Conveyor.LiftBall(currSpeed);
+    
   }
 
   // Called once the command ends or is interrupted.

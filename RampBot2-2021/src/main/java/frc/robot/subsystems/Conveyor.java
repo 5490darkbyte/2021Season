@@ -6,7 +6,9 @@ import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
 
 import com.ctre.phoenix.motorcontrol.can.*;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import edu.wpi.first.wpilibj.Joystick;
 
 public class Conveyor extends Subsystem
 {
@@ -42,7 +44,15 @@ public class Conveyor extends Subsystem
 
     public void LiftBall(double speed)
     {
-        speed = 0.1; // Set to a low speed starting off
+        SmartDashboard.putNumber("test", 9.0);
+        
+        double maxSpeed = 0.5;
+
+        if (speed>maxSpeed) {
+            speed = 0.4;
+        }
+        
+        // Set to a low speed starting off
         motor.set(speed);
     }
 
