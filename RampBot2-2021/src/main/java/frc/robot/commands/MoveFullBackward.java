@@ -21,6 +21,10 @@ public class MoveFullBackward extends Command {
     protected void execute() {
     		Robot.m_Chassis.moveBackward();
     }
+    protected void execute(double speed)
+    {
+        Robot.m_Chassis.moveBackward(speed);
+    }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

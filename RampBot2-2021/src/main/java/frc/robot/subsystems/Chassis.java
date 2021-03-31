@@ -2,15 +2,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
-
 import edu.wpi.first.wpilibj.Servo;
-
 
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
-import frc.robot.commands.LiftManualMove;
 
+import frc.robot.commands.LiftManualMove;
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // this is for the Talon SRX version
@@ -68,13 +68,14 @@ public class Chassis extends Subsystem {
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
     
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
-    
 	
-	//AnalogInput  LeftDistance = new AnalogInput(0);
-	//AnalogInput  RightDistance = new AnalogInput(0);
+	// Dr. Lawlis said "Analog Input" is for position sensors, may be relevant for autonomous but not now
+	/*
+	AnalogInput  LeftDistance = new AnalogInput(1);
+	AnalogInput  RightDistance = new AnalogInput(2);
+	*/
 	
-    
-    
+	
     public int segment;
     public double percent;
     public double tick; 
@@ -89,29 +90,35 @@ public class Chassis extends Subsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		
-		    /* factory default values */
+			/* factory default values */
+			
+
 		/*motorFrontLeft.configFactoryDefault();
 		motorRearLeft.configFactoryDefault();
 		motorFrontRight.configFactoryDefault();
 		motorRearRight.configFactoryDefault();*/
-
 		
-		//int bits;
-		//LeftDistance.setOversampleBits(4);
-		//bits = LeftDistance.getOversampleBits();
-		//LeftDistance.setAverageBits(2);
-		//bits = LeftDistance.getAverageBits();
+		//Use this code to calibrate the motors
+		
+		/*
+		int bits;
+		LeftDistance.setOversampleBits(4);
+		bits = LeftDistance.getOversampleBits();
+		LeftDistance.setAverageBits(2);
+		bits = LeftDistance.getAverageBits();
 
-		//RightDistance.setOversampleBits(4);
-		//bits = LeftDistance.getOversampleBits();
-		//RightDistance.setAverageBits(2);
-		//bits = LeftDistance.getAverageBits();
-
+		RightDistance.setOversampleBits(4);
+		bits = LeftDistance.getOversampleBits();
+		RightDistance.setAverageBits(2);
+		bits = LeftDistance.getAverageBits();
+		*/
+		
 
 		
 		//When no other command is running let the operator drive around using the joystick		 
 		setDefaultCommand(new DriveRobot());
-	
+		
+		
 		/*
 		SmartDashboard.putNumber("Gyro-X", imu.getAngleX());
 		SmartDashboard.putNumber("Gyro-Y", imu.getAngleY());
@@ -130,8 +137,11 @@ public class Chassis extends Subsystem {
 		*/
 		
 
-		//SmartDashboard.putNumber("Left Distance: ",  LeftDistance.getValue());
-		//SmartDashboard.putNumber("Right Distance: ",  RightDistance.getValue());
+		/* For AnalogInput, which we aren't using?
+		// SmartDashboard.putNumber("Left Distance: ", LeftDistancePot.get());
+		SmartDashboard.putNumber("Left Distance: ",  LeftDistance.getValue());
+		SmartDashboard.putNumber("Right Distance: ",  RightDistance.getValue());
+		*/
 		
 		
 
@@ -175,7 +185,10 @@ public class Chassis extends Subsystem {
 		*/
 		
 		SmartDashboard.putNumber("Speed: ", speed);
-		SmartDashboard.putNumber("Distance", driveEncoders.getDistance());
+		SmartDashboard.putNumber("Rate", driveEncoders.getRate());
+		SmartDashboard.putNumber("Distance: ", driveEncoders.getDistance());
+		SmartDashboard.putBoolean("Stopped: ", driveEncoders.getStopped());
+		SmartDashboard.putBoolean("Direction: ", driveEncoders.getDirection());
 	}
 
 	
@@ -192,12 +205,9 @@ public class Chassis extends Subsystem {
 		m_robotDrive.driveCartesian(Xout, Yout, Zout, 0);
 		*/
 		
-		
 		m_robotDrive.arcadeDrive(speed*driveStick.getY(), -speed*driveStick.getX());
-							
 		
-		//
-		
+		driveEncoders.reset();
 	}
 	
 	// Let an external function drive the chassis
@@ -219,7 +229,6 @@ public class Chassis extends Subsystem {
 		if (Y > 1.0) Y = 1.0;
 		if (speed > 1.0) speed = 1.0;
 		
-		
 		m_robotDrive.arcadeDrive(Y*speed, X*speed);
 		
 	}
@@ -234,10 +243,22 @@ public class Chassis extends Subsystem {
 	{
 		m_robotDrive.arcadeDrive(1, 0);
 	}
+	public void moveForward(double speed)
+	{
+		m_robotDrive.arcadeDrive(1*speed, 0);
+		SmartDashboard.putNumber("Total Pulses", driveEncoders.getRaw());
+
+		SmartDashboard.putNumber("getRaw(): ", driveEncoders.getRaw());
+	}
 	
+
 	public void moveBackward()
 	{
-		m_robotDrive.tankDrive(-1,0);
+		m_robotDrive.arcadeDrive(-1, 0);
+	}
+	public void moveBackward(double speed)
+	{
+		m_robotDrive.tankDrive(-1*speed,0);
 	}
 
 	public void hatchOpen()

@@ -11,6 +11,8 @@ import frc.robot.commands.TransferToForward;
 
 import frc.robot.commands.TransferToBack;
 
+import frc.robot.commands.MoveFullForward;
+
 import frc.robot.commands.LiftDown;
 import frc.robot.commands.LiftSwitch;
 import frc.robot.commands.MoveConveyor;
@@ -143,6 +145,7 @@ public class OI {
 		//aButton.whileHeld(new TransferToForward());
 		
 		aButton.whileHeld(new MoveConveyor(0.45));
+		bButton.whileHeld(new MoveFullForward(0.3));
 		
 		
 		

@@ -3,14 +3,21 @@ package frc.robot.commands;
 import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class MoveFullForward extends Command {
 
+    private double speed;
     public MoveFullForward() {
         requires(Robot.m_Chassis);
+        speed = 1;
+    }
+    public MoveFullForward(double mySpeed) {
+        requires(Robot.m_Chassis);
+        speed = mySpeed;
     }
 
     // Called just before this Command runs the first time
@@ -19,7 +26,7 @@ public class MoveFullForward extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.m_Chassis.moveForward();
+            Robot.m_Chassis.moveForward(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

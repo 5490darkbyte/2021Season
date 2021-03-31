@@ -70,6 +70,9 @@ import frc.robot.commands.WinchToOperate;
  */
 public class Robot extends TimedRobot {
 	
+	// test counter
+	double counter = 0.0;
+
 	//private static final boolean True = false;
 
 
@@ -97,7 +100,9 @@ public class Robot extends TimedRobot {
 
 	
 	
-	public void robotInit() {		
+	public void robotInit() {
+		
+
 		//UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
 		//camera.setVideoMode(PixelFormat.kYUYV,320,254,60);
 		//ultra.setAutomaticMode(true);
@@ -235,6 +240,7 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		// this allows activated commands to run..
 		//System.out.println("999 cm");
+		SmartDashboard.putNumber("Counter test: ", counter++);
 		Scheduler.getInstance().run();
 		log();
 	}
