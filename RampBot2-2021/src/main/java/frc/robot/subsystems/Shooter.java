@@ -59,7 +59,7 @@ public class Shooter extends Subsystem {
 
   public void SpinMotors(int time)
   {
-      m_shooterMotors.set(0.1);
+      m_shooterMotors.set(MotorConfigs.shooterSpeed);
   }
   public void stop()
   {

@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class MoveFullChute extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-  double currSpeed;
+  double[] currSpeed;
   //Constructor for the command
-  public MoveFullChute(double speed) {
+  public MoveFullChute() {
     requires(Robot.m_Chute);
-    currSpeed = speed;
+    currSpeed = Robot.m_Chute.getMySpeed();
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +28,7 @@ public class MoveFullChute extends Command {
   @Override
   public void execute() {
     
-    Robot.m_Chute.moveFullChute(currSpeed);
+    Robot.m_Chute.moveFullChute(currSpeed[0], currSpeed[1]);
     
   }
 

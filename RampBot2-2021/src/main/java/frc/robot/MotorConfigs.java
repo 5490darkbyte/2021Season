@@ -14,7 +14,10 @@ public class MotorConfigs
     public static int redlinePeakDuration = universalPeakDuration;
 
     // Chute Configs
-    public static double maxChuteSpeed = 0.3;
-    public static double slowChuteSpeed = 0.15;
-    public static double fastChuteSpeed = 0.225;
+    public static double maxChuteSpeed = 0.5;
+    public static double[] slowChuteSpeed = {-0.45, -0.3};
+    public static double[] fastChuteSpeed = {-0.45, -.275};
+
+    // Shooter Configs
+    public static double shooterSpeed = 0.2;
 }

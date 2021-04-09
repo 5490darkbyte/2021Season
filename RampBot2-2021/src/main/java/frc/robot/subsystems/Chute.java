@@ -17,7 +17,7 @@ public class Chute extends Subsystem
     
     private WPI_TalonSRX upperMotor = new WPI_TalonSRX(RobotMap.upperChute);
 
-    private double mySpeed;
+    private double[] mySpeed;
 
     public Chute()
     {
@@ -61,7 +61,7 @@ public class Chute extends Subsystem
     {
         mySpeed = MotorConfigs.slowChuteSpeed;
     }
-    public double getMySpeed()
+    public double[] getMySpeed()
     {
         return mySpeed;
     }
@@ -98,16 +98,11 @@ public class Chute extends Subsystem
         upperMotor.set(0);
     }
 
-    public void moveFullChute(double speed)
+    public void moveFullChute(double lowerSpeed, double upperSpeed)
     {
-        double maxSpeed = MotorConfigs.maxChuteSpeed;
-        if (speed>maxSpeed)
-        {
-            speed = maxSpeed;
-        }
 
-        lowerMotor.set(speed);
-        upperMotor.set(speed);
+        lowerMotor.set(lowerSpeed);
+        upperMotor.set(upperSpeed);
     }
     public void stopAll()
     {

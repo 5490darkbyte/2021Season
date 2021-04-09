@@ -156,8 +156,8 @@ public class OI {
 		//bButton.whileHeld(new TransferToBack());
 		//aButton.whileHeld(new TransferToForward());
 		aButton.whileHeld(new EnableFastChute());
-		rightButton.whileHeld(new MoveUpperChute());
-		leftButton.whileHeld(new MoveLowerChute());
+		rightButton.whileHeld(new Shoot());
+		leftButton.whileHeld(new MoveFullChute());
 		
 		bButton.whileHeld(new MoveFullForward(0.3));
 		

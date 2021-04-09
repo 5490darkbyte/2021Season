@@ -98,7 +98,6 @@ public class Chassis extends Subsystem {
 			/* factory default values */
 		leftDriveEncoder.setPosition(0.0);
 		rightDriveEncoder.setPosition(0.0);
-			
 
 		/*motorFrontLeft.configFactoryDefault();
 		motorRearLeft.configFactoryDefault();

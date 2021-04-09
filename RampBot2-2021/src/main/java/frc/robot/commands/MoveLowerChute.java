@@ -17,7 +17,7 @@ public class MoveLowerChute extends Command {
   //Constructor for the command
   public MoveLowerChute() {
     requires(Robot.m_Chute);
-    currSpeed = Robot.m_Chute.getMySpeed();
+    currSpeed = Robot.m_Chute.getMySpeed()[0];
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +29,7 @@ public class MoveLowerChute extends Command {
   public void execute() {
     
     Robot.m_Chute.moveLower(currSpeed);
+    SmartDashboard.putNumber(" LChute speed: ", currSpeed);
     
   }
 

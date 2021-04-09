@@ -17,7 +17,7 @@ public class MoveUpperChute extends Command {
   //Constructor for the command
   public MoveUpperChute() {
     requires(Robot.m_Chute);
-    currSpeed = Robot.m_Chute.getMySpeed();
+    currSpeed = Robot.m_Chute.getMySpeed()[1];
   }
 
   // Called when the command is initially scheduled.
@@ -28,7 +28,7 @@ public class MoveUpperChute extends Command {
   @Override
   public void execute() {
     
-    Robot.m_Chute.moveUpper(Robot.m_Chute.getMySpeed());
+    Robot.m_Chute.moveUpper(currSpeed);
     
   }
 

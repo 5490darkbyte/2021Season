@@ -31,9 +31,6 @@ public class MoveFullForward extends Command {
     protected void execute() {
         a++;
         Robot.m_Chassis.moveForward(speed);
-        SmartDashboard.putNumber("a:", a);
-        
-        
         
     }
 
