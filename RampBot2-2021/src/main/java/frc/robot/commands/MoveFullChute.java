@@ -4,19 +4,19 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Chute;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** An example command that uses an example subsystem. */
-public class MoveConveyor extends Command {
+public class MoveFullChute extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
   double currSpeed;
   //Constructor for the command
-  public MoveConveyor(double speed) {
-    requires(Robot.m_Conveyor);
+  public MoveFullChute(double speed) {
+    requires(Robot.m_Chute);
     currSpeed = speed;
   }
 
@@ -28,14 +28,14 @@ public class MoveConveyor extends Command {
   @Override
   public void execute() {
     
-    Robot.m_Conveyor.LiftBall(currSpeed);
+    Robot.m_Chute.moveFullChute(currSpeed);
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    Robot.m_Conveyor.stop();
+    Robot.m_Chute.stopAll();
   }
 
   // Returns true when the command should end.

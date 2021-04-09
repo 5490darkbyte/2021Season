@@ -33,9 +33,10 @@ public class RobotMap {
 
 	// the following are CAN addresses for the SparkMAX
 	public static int shooter1 = 11;
-	public static int conveyor = 12;
+	public static int lowerChute = 12;
 	public static int shooter2  = 13;
-	public static int mtrRearRight = 14;	
+	public static int mtrRearRight = 14;
+	public static int upperChute = 16;	
 	
 
 	// the following are CAN addresses for the Spark's	 

@@ -12,4 +12,9 @@ public class MotorConfigs
     public static int redlineContinuousCurrentLimit = universalCurrentLimit;
     public static int redlinePeakCurrent = 55;
     public static int redlinePeakDuration = universalPeakDuration;
+
+    // Chute Configs
+    public static double maxChuteSpeed = 0.3;
+    public static double slowChuteSpeed = 0.15;
+    public static double fastChuteSpeed = 0.225;
 }

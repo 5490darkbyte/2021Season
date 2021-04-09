@@ -33,7 +33,7 @@ import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Lift;
 
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Conveyor;
+import frc.robot.subsystems.Chute;
 
 // Subsystems with vision
 import org.opencv.core.Mat;
@@ -86,7 +86,7 @@ public class Robot extends TimedRobot {
 
 	public static Shooter m_Shoot;
 	public static OI m_oi;
-	public static Conveyor m_Conveyor;
+	public static Chute m_Chute;
 	
 	Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -112,7 +112,7 @@ public class Robot extends TimedRobot {
 		//m_CAM = new ClimbingCAM();		
 		//m_VAC = new Vacuum();
 		m_Shoot = new Shooter();
-		m_Conveyor = new Conveyor();
+		m_Chute = new Chute();
 
 
 		m_oi = new OI();

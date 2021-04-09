@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.*;
+import com.ctre.phoenix.sensors.CANCoder;
+
 
 import edu.wpi.first.wpilibj.Servo;
 
@@ -60,7 +62,10 @@ public class Chassis extends Subsystem {
 	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(RobotMap.backRightDrive);
 	SpeedControllerGroup m_right = new SpeedControllerGroup(motorFrontRight, motorMidRight, motorRearRight);
 
-	Encoder driveEncoders = new Encoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
+	//CANCoder driveEncoders = new CANCoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
+	CANCoder leftDriveEncoder = new CANCoder(RobotMap.leftEncoder);
+	CANCoder rightDriveEncoder = new CANCoder(RobotMap.rightEncoder);
+	
 	
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
@@ -91,6 +96,8 @@ public class Chassis extends Subsystem {
 		// Set the default command for a subsystem here.
 		
 			/* factory default values */
+		leftDriveEncoder.setPosition(0.0);
+		rightDriveEncoder.setPosition(0.0);
 			
 
 		/*motorFrontLeft.configFactoryDefault();
@@ -185,10 +192,7 @@ public class Chassis extends Subsystem {
 		*/
 		
 		SmartDashboard.putNumber("Speed: ", speed);
-		SmartDashboard.putNumber("Rate", driveEncoders.getRate());
-		SmartDashboard.putNumber("Distance: ", driveEncoders.getDistance());
-		SmartDashboard.putBoolean("Stopped: ", driveEncoders.getStopped());
-		SmartDashboard.putBoolean("Direction: ", driveEncoders.getDirection());
+		
 	}
 
 	
@@ -207,7 +211,7 @@ public class Chassis extends Subsystem {
 		
 		m_robotDrive.arcadeDrive(speed*driveStick.getY(), -speed*driveStick.getX());
 		
-		driveEncoders.reset();
+		
 	}
 	
 	// Let an external function drive the chassis
@@ -246,9 +250,12 @@ public class Chassis extends Subsystem {
 	public void moveForward(double speed)
 	{
 		m_robotDrive.arcadeDrive(1*speed, 0);
-		SmartDashboard.putNumber("Total Pulses", driveEncoders.getRaw());
+		SmartDashboard.putNumber("Position Left", leftDriveEncoder.getPosition());
+		SmartDashboard.putNumber("Position Right", rightDriveEncoder.getPosition());
+		SmartDashboard.putNumber("Absolute Position", leftDriveEncoder.getAbsolutePosition());
+		SmartDashboard.putNumber("Velocity", leftDriveEncoder.getVelocity());
+		
 
-		SmartDashboard.putNumber("getRaw(): ", driveEncoders.getRaw());
 	}
 	
 

@@ -15,7 +15,11 @@ import frc.robot.commands.MoveFullForward;
 
 import frc.robot.commands.LiftDown;
 import frc.robot.commands.LiftSwitch;
-import frc.robot.commands.MoveConveyor;
+
+import frc.robot.commands.EnableFastChute;
+import frc.robot.commands.MoveLowerChute;
+import frc.robot.commands.MoveUpperChute;
+import frc.robot.commands.MoveFullChute;
 //import frc.robot.commands.TestSequencer;
 import frc.robot.commands.LiftScale;
 //import frc.robot.commands.LiftSetpoint;
@@ -44,8 +48,11 @@ public class OI {
 	private JoystickButton trigger;
 	private JoystickButton thumb;
 
-	private JoystickButton leftTrigger;
-	private Trigger rightTrigger;
+	private JoystickButton leftButton;
+	private JoystickButton rightButton;
+
+	//private JoystickButton leftTrigger;
+	//private Trigger rightButton;
 	private JoystickButton aButton;
 	private JoystickButton bButton;
 	// Top buttons (counterclockwise from top left: 5-3-4-6)
@@ -127,8 +134,13 @@ public class OI {
 		aButton = new JoystickButton(xbox, 1);
 		bButton = new JoystickButton(xbox, 2);
 		
-		leftTrigger = new JoystickButton(xbox, 5);
-		rightTrigger = new JoystickButton(xbox, 6);
+		leftButton = new JoystickButton(xbox, 5);
+		rightButton = new JoystickButton(xbox, 6);
+
+		//leftTrigger = new JoystickButton(xbox, 5);
+		//rightTrigger = new JoystickButton(xbox, 6);
+
+
 		
 		
 		// COMMAND MAPPINGS
@@ -143,8 +155,10 @@ public class OI {
 
 		//bButton.whileHeld(new TransferToBack());
 		//aButton.whileHeld(new TransferToForward());
+		aButton.whileHeld(new EnableFastChute());
+		rightButton.whileHeld(new MoveUpperChute());
+		leftButton.whileHeld(new MoveLowerChute());
 		
-		aButton.whileHeld(new MoveConveyor(0.45));
 		bButton.whileHeld(new MoveFullForward(0.3));
 		
 		
