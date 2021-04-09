@@ -162,7 +162,6 @@ public class OI {
 		bButton.whileHeld(new MoveFullForward(0.3));
 		
 		
-		
 
 		/*
 		liftManualDown.whileHeld(new LiftManualMove(-1, 0.5));
