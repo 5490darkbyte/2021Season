@@ -16,8 +16,8 @@ public class MotorConfigs
     // Chute Configs
     public static double maxChuteSpeed = 0.5;
     public static double[] slowChuteSpeed = {-0.45, -0.3};
-    public static double[] fastChuteSpeed = {-0.45, -.275};
+    public static double[] fastChuteSpeed = {-0.5, -.35};
 
     // Shooter Configs
-    public static double shooterSpeed = 0.6;
+    public static double shooterSpeed = 0.8;
 }

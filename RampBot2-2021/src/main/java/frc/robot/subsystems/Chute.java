@@ -18,6 +18,7 @@ public class Chute extends Subsystem
     private WPI_TalonSRX upperMotor = new WPI_TalonSRX(RobotMap.upperChute);
 
     private double[] mySpeed;
+    public static int b = 2;
 
     public Chute()
     {
@@ -55,6 +56,8 @@ public class Chute extends Subsystem
 
     public void switchToFast()
     {
+        SmartDashboard.putNumber("FAST!", b);
+        b++;
         mySpeed = MotorConfigs.fastChuteSpeed;
     }
     public void switchToNormal()

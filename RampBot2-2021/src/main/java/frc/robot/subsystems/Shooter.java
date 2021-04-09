@@ -12,6 +12,7 @@ public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
   
   private WPI_TalonSRX testMotor = new WPI_TalonSRX(RobotMap.shooter1);
+  
   private WPI_TalonSRX rightShooter = new WPI_TalonSRX(RobotMap.shooter2);
 
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(testMotor, rightShooter);
@@ -26,6 +27,7 @@ public class Shooter extends Subsystem {
 		testMotor.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		testMotor.enableCurrentLimit(true);	
     testMotor.configOpenloopRamp(0, 0);
+    testMotor.setInverted(true);
 
     rightShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
 		rightShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);

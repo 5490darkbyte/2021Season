@@ -15,7 +15,6 @@ public class EnableFastChute extends Command {
 
   //Constructor for the command
   public EnableFastChute() {
-    requires(Robot.m_Chute);
   }
 
   // Called when the command is initially scheduled.
@@ -27,6 +26,7 @@ public class EnableFastChute extends Command {
   public void execute() {
     
     Robot.m_Chute.switchToFast();
+    SmartDashboard.putNumber("activate", 2);
     
   }
 
