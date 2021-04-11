@@ -8,6 +8,8 @@ import frc.robot.subsystems.Shooter;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 /** An example command that uses an example subsystem. */
 public class Shoot extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -25,7 +27,7 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_Shoot.SpinMotors(3);
+    Robot.m_Shoot.spinMotors(3);
   }
 
   // Called once the command ends or is interrupted.

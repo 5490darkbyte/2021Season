@@ -26,7 +26,6 @@ public class EnableFastChute extends Command {
   public void execute() {
     
     Robot.m_Chute.switchToFast();
-    SmartDashboard.putNumber("activate", 2);
     
   }
 

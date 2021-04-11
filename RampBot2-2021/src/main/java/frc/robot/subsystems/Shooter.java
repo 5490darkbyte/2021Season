@@ -8,6 +8,8 @@ import frc.robot.MotorConfigs;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
   
@@ -41,7 +43,7 @@ public class Shooter extends Subsystem {
     //m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);
     
       
-    addChild("Motor im testing", testMotor);
+    addChild("Motor I'm testing", testMotor);
     
 
 
@@ -59,9 +61,10 @@ public class Shooter extends Subsystem {
     // Nothing here right now.  Needed to compile the code
   }
 
-  public void SpinMotors(int time)
+  public void spinMotors(int time)
   {
       m_shooterMotors.set(MotorConfigs.shooterSpeed);
+      SmartDashboard.putNumber("Shooter spinMotors: ", MotorConfigs.shooterSpeed);
   }
   public void stop()
   {
