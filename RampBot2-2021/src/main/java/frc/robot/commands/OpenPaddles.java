@@ -4,19 +4,19 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.LowerChute;
+import frc.robot.subsystems.UpperChute;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /** An example command that uses an example subsystem. */
-public class MoveLowerChute extends Command {
+public class OpenPaddles extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
+
   //Constructor for the command
-  public MoveLowerChute() {
-    requires(Robot.m_LowerChute);
- 
+  public OpenPaddles() {
+    requires(Robot.m_Paddles);
   }
 
   // Called when the command is initially scheduled.
@@ -26,16 +26,14 @@ public class MoveLowerChute extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = Robot.m_LowerChute.getMySpeed();
-    Robot.m_LowerChute.moveUp(speed);
-
+      Robot.m_Paddles.openPaddles(90);
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    Robot.m_LowerChute.stop();
+      Robot.m_Paddles.closePaddles();
   }
 
   // Returns true when the command should end.

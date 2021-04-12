@@ -31,6 +31,8 @@ import frc.robot.commands.HatchClose;
 import frc.robot.commands.HatchOpen;
 import frc.robot.commands.Shoot;
 
+import frc.robot.commands.OpenPaddles;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -55,6 +57,8 @@ public class OI {
 	//private Trigger rightButton;
 	private JoystickButton aButton;
 	private JoystickButton bButton;
+	private JoystickButton yButton;
+	private JoystickButton xButton;
 	// Top buttons (counterclockwise from top left: 5-3-4-6)
 	private JoystickButton button5;
 	private JoystickButton button3;
@@ -133,6 +137,8 @@ public class OI {
 		button12 = new JoystickButton(m_joystick, 12);
 		aButton = new JoystickButton(xbox, 1);
 		bButton = new JoystickButton(xbox, 2);
+		yButton = new JoystickButton(xbox, 3);
+		xButton = new JoystickButton(xbox, 4);
 		
 		leftButton = new JoystickButton(xbox, 5);
 		rightButton = new JoystickButton(xbox, 6);
@@ -156,10 +162,15 @@ public class OI {
 		//bButton.whileHeld(new TransferToBack());
 		//aButton.whileHeld(new TransferToForward());
 		aButton.whileHeld(new EnableFastChute());
-		rightButton.whileHeld(new Shoot());
-		leftButton.whileHeld(new MoveFullChute());
+		//rightButton.whileHeld(new Shoot());
+		leftButton.whileHeld(new MoveLowerChute());
+		rightButton.whileHeld(new MoveUpperChute());
 		
-		bButton.whileHeld(new MoveFullForward(0.3));
+		bButton.whileHeld(new Shoot());
+
+		yButton.whileHeld(new OpenPaddles());
+		
+
 		
 		
 

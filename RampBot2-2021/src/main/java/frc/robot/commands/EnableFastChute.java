@@ -4,7 +4,6 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Chute;
 import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,14 +24,17 @@ public class EnableFastChute extends Command {
   @Override
   public void execute() {
     
-    Robot.m_Chute.switchToFast();
+    Robot.m_LowerChute.switchToFast();
+    Robot.m_UpperChute.switchToFast();
+
     
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    Robot.m_Chute.switchToNormal();
+    Robot.m_LowerChute.switchToNormal();
+    Robot.m_UpperChute.switchToNormal();
   }
 
   // Returns true when the command should end.

@@ -18,6 +18,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import sun.misc.Timer;
@@ -33,7 +34,9 @@ import frc.robot.subsystems.Chassis;
 import frc.robot.subsystems.Lift;
 
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Chute;
+import frc.robot.subsystems.LowerChute;
+import frc.robot.subsystems.Paddles;
+import frc.robot.subsystems.UpperChute;
 
 // Subsystems with vision
 import org.opencv.core.Mat;
@@ -86,7 +89,9 @@ public class Robot extends TimedRobot {
 
 	public static Shooter m_Shoot;
 	public static OI m_oi;
-	public static Chute m_Chute;
+	public static LowerChute m_LowerChute;
+	public static UpperChute m_UpperChute;
+	public static Paddles m_Paddles;
 	
 	Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -112,7 +117,9 @@ public class Robot extends TimedRobot {
 		//m_CAM = new ClimbingCAM();		
 		//m_VAC = new Vacuum();
 		m_Shoot = new Shooter();
-		m_Chute = new Chute();
+		m_LowerChute = new LowerChute();
+		m_UpperChute = new UpperChute();
+		m_Paddles = new Paddles();
 
 
 		m_oi = new OI();
