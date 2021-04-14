@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.sensors.CANCoder;
 
+import frc.robot.MySpeedControllerGroup;
 
 import edu.wpi.first.wpilibj.Servo;
 
@@ -55,12 +56,14 @@ public class Chassis extends Subsystem {
 	WPI_TalonSRX motorFrontLeft = new WPI_TalonSRX(RobotMap.frontLeftDrive);
 	WPI_TalonSRX motorMidLeft = new WPI_TalonSRX(RobotMap.midLeftDrive);
 	WPI_TalonSRX motorRearLeft = new WPI_TalonSRX(RobotMap.backLeftDrive);
-	SpeedControllerGroup m_left = new SpeedControllerGroup(motorFrontLeft, motorMidLeft, motorRearLeft);
+	WPI_TalonSRX[] leftControllers = {motorFrontLeft, motorMidLeft, motorRearLeft};
+	MySpeedControllerGroup m_left = new MySpeedControllerGroup(leftControllers);
 
 	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(RobotMap.frontRightDrive);
 	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midRightDrive);
 	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(RobotMap.backRightDrive);
-	SpeedControllerGroup m_right = new SpeedControllerGroup(motorFrontRight, motorMidRight, motorRearRight);
+	WPI_TalonSRX[] rightControllers = {motorFrontRight, motorMidRight, motorRearRight};
+	SpeedControllerGroup m_right = new MySpeedControllerGroup(rightControllers, 0.98);
 
 	//CANCoder driveEncoders = new CANCoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
 	CANCoder leftDriveEncoder = new CANCoder(RobotMap.leftEncoder);

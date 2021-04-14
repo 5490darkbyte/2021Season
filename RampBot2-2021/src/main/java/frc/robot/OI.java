@@ -169,6 +169,8 @@ public class OI {
 		bButton.whileHeld(new Shoot());
 
 		yButton.whileHeld(new OpenPaddles());
+
+		xButton.whileHeld(new MoveFullForward());
 		
 
 		

@@ -13,23 +13,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
   
-  private WPI_TalonSRX testMotor = new WPI_TalonSRX(RobotMap.shooter1);
-  
+  private WPI_TalonSRX leftShooter = new WPI_TalonSRX(RobotMap.shooter1);
   private WPI_TalonSRX rightShooter = new WPI_TalonSRX(RobotMap.shooter2);
 
-  private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(testMotor, rightShooter);
 
-  
+  private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
+
   
   public Shooter() {
     
     // Configuration for the motor being used
-    testMotor.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
-		testMotor.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
-		testMotor.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
-		testMotor.enableCurrentLimit(true);	
-    testMotor.configOpenloopRamp(0, 0);
-    testMotor.setInverted(true);
+    leftShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
+		leftShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
+		leftShooter.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
+		leftShooter.enableCurrentLimit(true);	
+    leftShooter.configOpenloopRamp(0, 0);
+    leftShooter.setInverted(true);
 
     rightShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
 		rightShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
@@ -43,7 +42,7 @@ public class Shooter extends Subsystem {
     //m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);
     
       
-    addChild("Motor I'm testing", testMotor);
+    addChild("Motor I'm testing", leftShooter);
     
 
 
