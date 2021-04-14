@@ -19,6 +19,9 @@ public class Shooter extends Subsystem {
 
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
 
+  private Encoder leftEncoder = new Encoder(1, 2);
+  private Encoder rightEncoder = new Encoder(3, 4);
+
   
   public Shooter() {
     
@@ -64,6 +67,9 @@ public class Shooter extends Subsystem {
   {
       m_shooterMotors.set(MotorConfigs.shooterSpeed);
       SmartDashboard.putNumber("Shooter spinMotors: ", MotorConfigs.shooterSpeed);
+
+      SmartDashboard.putNumber("LeftShoot speed", leftEncoder.getRate());
+      SmartDashboard.putNumber("RightShoot speed", rightEncoder.getRate());
   }
   public void stop()
   {

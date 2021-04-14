@@ -4,11 +4,12 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.PIDCommand;
 
 /**
  *
  */
-public class MoveFullForward extends Command {
+public class MoveFullForward extends PIDCommand {
 
     public static int a = 0;
     private double speed;

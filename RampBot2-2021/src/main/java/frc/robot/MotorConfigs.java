@@ -19,5 +19,6 @@ public class MotorConfigs
     public static double[] fastChuteSpeed = {-0.5, -.375};
 
     // Shooter Configs
-    public static double shooterSpeed = 1;
+    // Best is 0.93
+    public static double shooterSpeed = 0.1;
 }

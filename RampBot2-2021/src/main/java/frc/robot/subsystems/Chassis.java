@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
 
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
+
 import frc.robot.commands.LiftManualMove;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -46,7 +49,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 /**
  *
  */
-public class Chassis extends Subsystem {
+public class Chassis extends PIDSubsystem {
 	
 	// lower limit for speed setting  
 	private static final double minimum_drive = 0.1;
@@ -68,8 +71,6 @@ public class Chassis extends Subsystem {
 	//CANCoder driveEncoders = new CANCoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
 	CANCoder leftDriveEncoder = new CANCoder(RobotMap.leftEncoder);
 	CANCoder rightDriveEncoder = new CANCoder(RobotMap.rightEncoder);
-	
-	
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
 	
@@ -83,7 +84,6 @@ public class Chassis extends Subsystem {
 	AnalogInput  RightDistance = new AnalogInput(2);
 	*/
 	
-	
     public int segment;
     public double percent;
     public double tick; 
@@ -94,7 +94,11 @@ public class Chassis extends Subsystem {
     // here. Call these from Commands.
 	// see DriveTrain example
 
-	
+	public Chassis() {
+		super("Chassis", 0.0, 0.0, 0.0);// The constructor passes a name for the subsystem and the P, I and D constants that are useed when computing the motor output
+        setAbsoluteTolerance(0.05);
+	}
+
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		
@@ -197,6 +201,17 @@ public class Chassis extends Subsystem {
 		
 	}
 
+
+	// PIDSubsystem must implement this method.
+	// Used 0.0 as a placeholder since it's not implemented yet
+	protected double returnPIDInput() {
+        //return pot.getAverageVoltage(); // returns the sensor value that is providing the feedback for the system
+		return 0.0;
+	}
+
+    protected void usePIDOutput(double output) {
+        m_left.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
+    }
 	
 	public void Drive(Joystick driveStick)
 	{
@@ -257,6 +272,9 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Absolute Position", leftDriveEncoder.getAbsolutePosition());
 		SmartDashboard.putNumber("Velocity", leftDriveEncoder.getVelocity());
 		
+		SmartDashboard.putNumber("getPosition", getPosition());
+		SmartDashboard.putNumber("getSetpoint", getSetpoint());
+		SmartDashboard.putNumber("returnPIDInput(), currently undefined", returnPIDInput());
 
 	}
 	
