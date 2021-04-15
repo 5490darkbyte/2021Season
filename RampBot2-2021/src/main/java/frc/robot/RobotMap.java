@@ -81,8 +81,8 @@ public class RobotMap {
 	
 	
 	// Encoder map
-	public static int leftEncoder = 21;
-	public static int rightEncoder = 22;	
+	public static int leftEncoder = 22;
+	public static int rightEncoder = 21;	
 		
 	
 

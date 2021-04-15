@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-
 import frc.robot.commands.LiftManualMove;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -49,7 +46,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 /**
  *
  */
-public class Chassis extends PIDSubsystem {
+public class Chassis extends Subsystem {
 	
 	// lower limit for speed setting  
 	private static final double minimum_drive = 0.1;
@@ -60,13 +57,13 @@ public class Chassis extends PIDSubsystem {
 	WPI_TalonSRX motorMidLeft = new WPI_TalonSRX(RobotMap.midLeftDrive);
 	WPI_TalonSRX motorRearLeft = new WPI_TalonSRX(RobotMap.backLeftDrive);
 	WPI_TalonSRX[] leftControllers = {motorFrontLeft, motorMidLeft, motorRearLeft};
-	MySpeedControllerGroup m_left = new MySpeedControllerGroup(leftControllers);
+	SpeedControllerGroup m_left = new SpeedControllerGroup(leftControllers);
 
 	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(RobotMap.frontRightDrive);
 	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midRightDrive);
 	WPI_TalonSRX motorRearRight = new WPI_TalonSRX(RobotMap.backRightDrive);
 	WPI_TalonSRX[] rightControllers = {motorFrontRight, motorMidRight, motorRearRight};
-	SpeedControllerGroup m_right = new MySpeedControllerGroup(rightControllers, 0.98);
+	SpeedControllerGroup m_right = new SpeedControllerGroup(rightControllers);
 
 	//CANCoder driveEncoders = new CANCoder(RobotMap.leftEncoder, RobotMap.rightEncoder);
 	CANCoder leftDriveEncoder = new CANCoder(RobotMap.leftEncoder);
@@ -84,6 +81,7 @@ public class Chassis extends PIDSubsystem {
 	AnalogInput  RightDistance = new AnalogInput(2);
 	*/
 	
+	
     public int segment;
     public double percent;
     public double tick; 
@@ -94,11 +92,7 @@ public class Chassis extends PIDSubsystem {
     // here. Call these from Commands.
 	// see DriveTrain example
 
-	public Chassis() {
-		super("Chassis", 0.0, 0.0, 0.0);// The constructor passes a name for the subsystem and the P, I and D constants that are useed when computing the motor output
-        setAbsoluteTolerance(0.05);
-	}
-
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		
@@ -201,17 +195,6 @@ public class Chassis extends PIDSubsystem {
 		
 	}
 
-
-	// PIDSubsystem must implement this method.
-	// Used 0.0 as a placeholder since it's not implemented yet
-	protected double returnPIDInput() {
-        //return pot.getAverageVoltage(); // returns the sensor value that is providing the feedback for the system
-		return 0.0;
-	}
-
-    protected void usePIDOutput(double output) {
-        m_left.pidWrite(output); // this is where the computed output value fromthe PIDController is applied to the motor
-    }
 	
 	public void Drive(Joystick driveStick)
 	{
@@ -267,14 +250,11 @@ public class Chassis extends PIDSubsystem {
 	public void moveForward(double speed)
 	{
 		m_robotDrive.arcadeDrive(1*speed, 0);
-		SmartDashboard.putNumber("Position Left", leftDriveEncoder.getPosition());
-		SmartDashboard.putNumber("Position Right", rightDriveEncoder.getPosition());
+		SmartDashboard.putNumber("Velocity Left", leftDriveEncoder.getVelocity());
+		SmartDashboard.putNumber("Velocity Right", rightDriveEncoder.getVelocity());
 		SmartDashboard.putNumber("Absolute Position", leftDriveEncoder.getAbsolutePosition());
 		SmartDashboard.putNumber("Velocity", leftDriveEncoder.getVelocity());
 		
-		SmartDashboard.putNumber("getPosition", getPosition());
-		SmartDashboard.putNumber("getSetpoint", getSetpoint());
-		SmartDashboard.putNumber("returnPIDInput(), currently undefined", returnPIDInput());
 
 	}
 	
@@ -288,9 +268,29 @@ public class Chassis extends PIDSubsystem {
 		m_robotDrive.tankDrive(-1*speed,0);
 	}
 
+	public void moveLeftForward(double speed)
+	{
+		SmartDashboard.putNumber("Left side velocity", leftDriveEncoder.getVelocity());
+		m_left.set(speed);
+	}
+	public void moveRightForward(double speed)
+	{
+		SmartDashboard.putNumber("Right side velocity", rightDriveEncoder.getVelocity());
+		m_right.set(speed);
+	}
+
 	public void hatchOpen()
 	{
 		
+	}
+
+	public double getLeftVelocity()
+	{
+		return leftDriveEncoder.getVelocity();
+	}
+	public double getRightVelocity()
+	{
+		return rightDriveEncoder.getVelocity();
 	}
 
 	public void hatchClose()

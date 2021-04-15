@@ -4,18 +4,20 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
 
 /**
  *
  */
-public class MoveFullForward extends PIDCommand {
+public class MoveFullForward extends Command {
 
-    public static int a = 0;
+    private static int c = 0;
     private double speed;
+    private static double total = 0;
+    private static double[] speeds = new double[100];
+
     public MoveFullForward() {
         requires(Robot.m_Chassis);
-        speed = 1;
+        speed = 0.2;
         
     }
     public MoveFullForward(double mySpeed) {
@@ -30,8 +32,35 @@ public class MoveFullForward extends PIDCommand {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        a++;
-        Robot.m_Chassis.moveForward(speed);
+        SmartDashboard.putNumber("C", c);
+        c++;
+        if (c<=500)
+        {
+            Robot.m_Chassis.moveForward(speed);
+            
+            
+            if (c%5 == 0)
+            {
+                speeds[c/5] = Robot.m_Chassis.getLeftVelocity();
+                total += speeds[c/5];
+            }
+      
+            
+            // for (double spd : speeds)
+            // {
+            //     total += spd;
+            // }
+            double ave = total / (c/5);
+            SmartDashboard.putNumber("Ave Left Spd", ave);
+            SmartDashboard.putNumberArray("speeds", speeds);
+            SmartDashboard.putStringArray("test", new String[4]);
+        }
+        // if (c == 499) {
+            
+        // }
+        
+
+
         
     }
 
