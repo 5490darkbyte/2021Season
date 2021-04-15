@@ -52,8 +52,11 @@ public class MoveFullForward extends Command {
             // }
             double ave = total / (c/5);
             SmartDashboard.putNumber("Ave Left Spd", ave);
-            SmartDashboard.putNumberArray("speeds", speeds);
-            SmartDashboard.putStringArray("test", new String[4]);
+
+            // Can't get arrays to show on the SmartDashboard for some reason?
+            // SmartDashboard.setDefaultNumberArray("test", speeds);
+            // SmartDashboard.putNumberArray("speeds", speeds);
+            // SmartDashboard.putStringArray("test", new String[4]);
         }
         // if (c == 499) {
             

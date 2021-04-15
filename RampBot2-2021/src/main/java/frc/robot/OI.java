@@ -170,7 +170,7 @@ public class OI {
 
 		yButton.whileHeld(new OpenPaddles());
 
-		bButton.whileHeld(new MoveFullForward(5.5/12));
+		bButton.whileHeld(new MoveFullForward(9.0/12));
 		
 
 		
