@@ -73,16 +73,20 @@ public class MoveFullForward extends Command {
             final int MAXC = LENG * INTERVAL;
 
             // when c % CDIVIDE == 0, a new average is calculated and displayed on SmartDashboard
-            // currently 500
-            final int CDIVIDE = MAXC / INTERVAL;
+            // currently 600
+            final int CDIVIDE = 600;
+
+            // number of speed2 velocities recorded for each currVolt value
+            // currently 120
+                // example: 120 velocities each are recorded for currVolts = 3, 4, 5, etc.
+            final int VELNUM = CDIVIDE / INTERVAL;
 
         if (c <= 5000)
         {
-            // currVolts gives gradually increasing number of volts from 1 - 10
-                // depending on current value of c
-                // +1 because otherwise it'd go 0-9 volts
+            // currVolts gives gradually increasing number of volts from 3 - 11
+                // currVolts = f(c) = c/600 + 3, a double rounded to nearest int
+            double currVolts = (int) (c / 600) + 3.0;
             // moves robot forward depending on currVolts
-            double currVolts = (int) (c / 500) + 1.0;
             Robot.m_Chassis.moveForward(currVolts/12);
             
             if (c%5 == 0)
@@ -90,15 +94,15 @@ public class MoveFullForward extends Command {
                 speeds2[c/5] = Robot.m_Chassis.getLeftVelocity();
             }
 
-            if ((c != 0) && (c % 500 == 0))
+            if ((c != 0) && (c % 600 == 0))
             {
                 int total2 = 0;
 
-                for (int i = c/5 - 100; i < c/5; i++) {
+                for (int i = c/5 - 120; i < c/5; i++) {
                     total2 += speeds2[i];
                 }
 
-                double ave = total2 / 100;
+                double ave = total2 / 120;
                 String volts = currVolts+"";
                 SmartDashboard.putNumber(volts, ave);
 
