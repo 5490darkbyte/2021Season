@@ -4,6 +4,7 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,8 +14,10 @@ public class MoveFullForward extends Command {
     private static int c = 0;
     private double speed;
     private static double total = 0;
-    private static double[] speeds = new double[100];
+    private static double[] speeds = new double[10];
     private static double[] speeds2 = new double[1000];
+    
+    private static double[] voltages = new double[1000];
 
     public MoveFullForward() {
         requires(Robot.m_Chassis);
@@ -29,6 +32,9 @@ public class MoveFullForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        
+        SmartDashboard.putBoolean("Initialized", true);
+        SmartDashboard.putNumberArray("Velocities", new double[]{1.0, 2.0, 3.0});
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -38,25 +44,29 @@ public class MoveFullForward extends Command {
 
         // Commented out old version (use control + / to uncomment).
 
-        // if (c<=500)
-        // {
-        //     Robot.m_Chassis.moveForward(speed);
+        if (c<=145)
+        {
+            Robot.m_Chassis.moveForward(speed);
             
-        //     if (c%5 == 0)
-        //     {
-        //         speeds[c/5] = Robot.m_Chassis.getLeftVelocity();
-        //         total += speeds[c/5];
-        //     }
+            if (c%30 == 0)
+            {
+                speeds[c/30] = Robot.m_Chassis.getLeftVelocity();
+                total += speeds[c/30];
+            }
       
-        //     double ave = total / (c/5);
-        //     SmartDashboard.putNumber("Ave Left Spd", ave);
-
-        //     // Can't get arrays to show on the SmartDashboard for some reason?
-        //     // SmartDashboard.setDefaultNumberArray("test", speeds);
-        //     // SmartDashboard.putNumberArray("speeds", speeds);
-        //     // SmartDashboard.putStringArray("test", new String[4]);
-        // }
+            double ave = total / (c/5);
+            SmartDashboard.putNumber("Ave Left Spd", ave);
+        }
+        else{
+            Robot.m_Chassis.StopMotors();
+        }
+        SmartDashboard.setDefaultNumberArray("Velocs", speeds);
+            // Can't get arrays to show on the SmartDashboard for some reason?
+            // SmartDashboard.setDefaultNumberArray("test", speeds);
+            // SmartDashboard.putNumberArray("speeds", speeds);
+            // SmartDashboard.putStringArray("test", new String[4]);
         
+        /*
         // Uses speeds2 instead of speeds; speeds2 has 1000 values (5000 / 5 = 1000)
 
             // Variables for keeping track of velocity/c
@@ -91,24 +101,30 @@ public class MoveFullForward extends Command {
             
             if (c%5 == 0)
             {
+                SmartDashboard.putNumber("Curr Left Motor Speed", Robot.m_Chassis.getLeftVelocity());
                 speeds2[c/5] = Robot.m_Chassis.getLeftVelocity();
+                voltages[c/5] = Robot.m_Chassis.getBusVoltage();
             }
 
             if ((c != 0) && (c % 600 == 0))
             {
-                int total2 = 0;
+                double totalS = 0;
+                double totalV = 0;
 
                 for (int i = c/5 - 120; i < c/5; i++) {
-                    total2 += speeds2[i];
+                    totalS += speeds2[i];
+                    totalV += voltages[i];
                 }
 
-                double ave = total2 / 120;
+                double aveS = totalS /120.0;
+                double aveV = totalV/120.0;
+
                 String volts = currVolts+"";
-                SmartDashboard.putNumber(volts, ave);
+                SmartDashboard.putString(volts, ""+"Average Speed: "+aveS+", Average Volts: "+aveV);
 
             }
         }
-
+        */
         
     }
 

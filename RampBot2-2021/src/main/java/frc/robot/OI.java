@@ -161,16 +161,17 @@ public class OI {
 
 		//bButton.whileHeld(new TransferToBack());
 		//aButton.whileHeld(new TransferToForward());
-		aButton.whileHeld(new EnableFastChute());
+		//aButton.whileHeld(new EnableFastChute());
 		//rightButton.whileHeld(new Shoot());
 		leftButton.whileHeld(new MoveLowerChute());
 		rightButton.whileHeld(new MoveUpperChute());
 		
-		//bButton.whileHeld(new Shoot());
+		//bButton.whileHeld(new Shoot(true));
+		//aButton.whileHeld(new Shoot(true));
 
 		yButton.whileHeld(new OpenPaddles());
 
-		bButton.whileHeld(new MoveFullForward(9.0/12));
+		bButton.whileHeld(new MoveFullForward(-9.0/12));
 		
 
 		

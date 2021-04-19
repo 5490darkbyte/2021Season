@@ -58,6 +58,7 @@ public class Chassis extends Subsystem {
 	WPI_TalonSRX motorRearLeft = new WPI_TalonSRX(RobotMap.backLeftDrive);
 	WPI_TalonSRX[] leftControllers = {motorFrontLeft, motorMidLeft, motorRearLeft};
 	SpeedControllerGroup m_left = new SpeedControllerGroup(leftControllers);
+	
 
 	WPI_TalonSRX motorFrontRight = new WPI_TalonSRX(RobotMap.frontRightDrive);
 	WPI_TalonSRX motorMidRight = new WPI_TalonSRX(RobotMap.midRightDrive);
@@ -100,6 +101,10 @@ public class Chassis extends Subsystem {
 		leftDriveEncoder.setPosition(0.0);
 		rightDriveEncoder.setPosition(0.0);
 
+		leftDriveEncoder.configVelocityMeasurementWindow(32, 0);
+		rightDriveEncoder.configVelocityMeasurementWindow(32, 0);
+
+		
 		/*motorFrontLeft.configFactoryDefault();
 		motorRearLeft.configFactoryDefault();
 		motorFrontRight.configFactoryDefault();
@@ -298,6 +303,11 @@ public class Chassis extends Subsystem {
 			//0.45
 		//0.8
 	
+	}
+
+	public double getBusVoltage()
+	{
+		return leftDriveEncoder.getBusVoltage();
 	}
 }
 

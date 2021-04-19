@@ -14,9 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Shoot extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
-
+  boolean isForward;
   //Constructor for the command
-  public Shoot() {
+  public Shoot(boolean isForward) {
+    this.isForward = isForward;
     requires(Robot.m_Shoot);
   }
 
@@ -27,7 +28,7 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_Shoot.spinMotors(3);
+    Robot.m_Shoot.spinMotors(isForward);
   }
 
   // Called once the command ends or is interrupted.

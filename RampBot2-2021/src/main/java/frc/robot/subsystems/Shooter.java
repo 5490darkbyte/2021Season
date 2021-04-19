@@ -61,11 +61,19 @@ public class Shooter extends Subsystem {
   public void initDefaultCommand()
   {
     // Nothing here right now.  Needed to compile the code
+    
   }
 
-  public void spinMotors(int time)
+  public void spinMotors(boolean isForward)
   {
-      m_shooterMotors.set(MotorConfigs.shooterSpeed);
+      if (isForward)
+      {
+        m_shooterMotors.set(MotorConfigs.shooterSpeed);
+      }
+      else
+      {
+        m_shooterMotors.set(MotorConfigs.shooterSpeed*-1);
+      }
       SmartDashboard.putNumber("Shooter spinMotors: ", MotorConfigs.shooterSpeed);
 
       SmartDashboard.putNumber("LeftShoot speed", leftEncoder.getRate());
