@@ -263,6 +263,18 @@ public class Chassis extends Subsystem {
 
 	}
 	
+	public void move1Side(double speed, boolean leftSide)
+	{
+		if (leftSide)
+		{
+			m_left.set(speed);
+		}
+		else
+		{
+			m_right.set(speed);
+		}
+		
+	}
 
 	public void moveBackward()
 	{

@@ -15,7 +15,7 @@ import frc.robot.commands.MoveFullForward;
 
 import frc.robot.commands.LiftDown;
 import frc.robot.commands.LiftSwitch;
-
+import frc.robot.commands.Move1SideForward;
 import frc.robot.commands.EnableFastChute;
 import frc.robot.commands.MoveLowerChute;
 import frc.robot.commands.MoveUpperChute;
@@ -171,7 +171,7 @@ public class OI {
 
 		yButton.whileHeld(new OpenPaddles());
 
-		//bButton.whileHeld(new MoveFullForward(-9.0/12));
+		//bButton.whileHeld(new Move1SideForward(-0.6));
 		
 
 		

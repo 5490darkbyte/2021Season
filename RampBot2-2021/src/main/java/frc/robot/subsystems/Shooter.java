@@ -35,14 +35,19 @@ public class Shooter extends Subsystem {
 		leftShooter.enableCurrentLimit(true);	
     leftShooter.configOpenloopRamp(0, 0);
     leftShooter.setInverted(true);
-  
+
+    //Motionmatic extra configurations
+    leftShooter.configMotionCruiseVelocity(MotorConfigs.redlineLeftCruiseVelocity);
+    leftShooter.configMotionAcceleration(MotorConfigs.redlineLeftAccel);
 
     rightShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
 		rightShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
 		rightShooter.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		rightShooter.enableCurrentLimit(true);	
     rightShooter.configOpenloopRamp(0, 0);
-
+    //Additional Motionmatic configurations
+    rightShooter.configMotionCruiseVelocity(MotorConfigs.redlineRightCruiseVelocity);
+    leftShooter.configMotionAcceleration(MotorConfigs.redlineRightAccel);
     
     
     // Configuration for the encoders
@@ -98,6 +103,6 @@ public class Shooter extends Subsystem {
     return leftShooter.getSensorCollection().getPulseWidthVelocity();
   }*/
   public double getBusVoltage() {
-    return leftShooter.getBusVoltage();
+    return rightShooter.getBusVoltage();
   }
 }
