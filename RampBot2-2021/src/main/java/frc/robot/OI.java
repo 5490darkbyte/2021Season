@@ -166,12 +166,12 @@ public class OI {
 		leftButton.whileHeld(new MoveLowerChute());
 		rightButton.whileHeld(new MoveUpperChute());
 		
-		//bButton.whileHeld(new Shoot(true));
+		bButton.whileHeld(new Shoot(true));
 		//aButton.whileHeld(new Shoot(true));
 
 		yButton.whileHeld(new OpenPaddles());
 
-		bButton.whileHeld(new MoveFullForward(-9.0/12));
+		//bButton.whileHeld(new MoveFullForward(-9.0/12));
 		
 
 		

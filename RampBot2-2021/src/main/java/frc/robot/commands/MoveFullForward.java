@@ -5,11 +5,16 @@ import frc.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 /**
  *
  */
 public class MoveFullForward extends Command {
+
+    private FileWriter writer;
 
     private static int c = 0;
     private double speed;
@@ -32,9 +37,16 @@ public class MoveFullForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        try{
+            writer = new FileWriter("Velocity Data.csv");
+        }
+        catch(IOException e)
+        {
+            System.out.println("IO Error");
+        }
         
-        SmartDashboard.putBoolean("Initialized", true);
-        SmartDashboard.putNumberArray("Velocities", new double[]{1.0, 2.0, 3.0});
+        
+
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -50,6 +62,13 @@ public class MoveFullForward extends Command {
             
             if (c%30 == 0)
             {
+                // try {
+                //     writer.write(Double.toString((Robot.m_Chassis.getLeftVelocity())));
+                //     SmartDashboard.putBoolean("Written", true);
+                // } catch (IOException e) {
+                //     // TODO Auto-generated catch block
+                //     e.printStackTrace();
+                // }
                 speeds[c/30] = Robot.m_Chassis.getLeftVelocity();
                 total += speeds[c/30];
             }
@@ -60,8 +79,9 @@ public class MoveFullForward extends Command {
         else{
             Robot.m_Chassis.StopMotors();
         }
-        SmartDashboard.setDefaultNumberArray("Velocs", speeds);
-            // Can't get arrays to show on the SmartDashboard for some reason?
+        
+        
+            // Can't get arrays to show on the SmartDashboard because it was never implemented
             // SmartDashboard.setDefaultNumberArray("test", speeds);
             // SmartDashboard.putNumberArray("speeds", speeds);
             // SmartDashboard.putStringArray("test", new String[4]);
@@ -135,7 +155,14 @@ public class MoveFullForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    		Robot.m_Chassis.StopMotors();
+            Robot.m_Chassis.StopMotors();
+            SmartDashboard.putBoolean("Stopped", true);
+            try {
+                writer.close();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
     }
 
     // Called when another command which requires one or more of the same

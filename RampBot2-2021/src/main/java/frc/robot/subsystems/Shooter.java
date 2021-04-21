@@ -9,6 +9,9 @@ import frc.robot.MotorConfigs;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.ctre.phoenix.sensors.CANCoder;
+
+
 
 public class Shooter extends Subsystem {
   /** Creates a new ExampleSubsystem. */
@@ -19,8 +22,8 @@ public class Shooter extends Subsystem {
 
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
 
-  private Encoder leftEncoder = new Encoder(1, 2);
-  private Encoder rightEncoder = new Encoder(3, 4);
+  private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
+  private CANCoder rightEncoder = new CANCoder(RobotMap.shooter2);
 
   
   public Shooter() {
@@ -32,6 +35,7 @@ public class Shooter extends Subsystem {
 		leftShooter.enableCurrentLimit(true);	
     leftShooter.configOpenloopRamp(0, 0);
     leftShooter.setInverted(true);
+  
 
     rightShooter.configContinuousCurrentLimit(MotorConfigs.redlineContinuousCurrentLimit, 0);
 		rightShooter.configPeakCurrentLimit(MotorConfigs.redlinePeakCurrent, 0);
@@ -74,13 +78,26 @@ public class Shooter extends Subsystem {
       {
         m_shooterMotors.set(MotorConfigs.shooterSpeed*-1);
       }
-      SmartDashboard.putNumber("Shooter spinMotors: ", MotorConfigs.shooterSpeed);
-
-      SmartDashboard.putNumber("LeftShoot speed", leftEncoder.getRate());
-      SmartDashboard.putNumber("RightShoot speed", rightEncoder.getRate());
+  }
+  public void spinMotors(double speed)
+  {
+    m_shooterMotors.set(speed);
   }
   public void stop()
   {
     m_shooterMotors.set(0);
+  }
+
+  public double getLeftVelocity() {
+    return leftShooter.getSensorCollection().getQuadratureVelocity();
+  }
+  /*public double getPWPosition() {
+    return leftShooter.getSensorCollection().getPulseWidthPosition();
+  }
+  public double getPWVelocity() {
+    return leftShooter.getSensorCollection().getPulseWidthVelocity();
+  }*/
+  public double getBusVoltage() {
+    return leftShooter.getBusVoltage();
   }
 }
