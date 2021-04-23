@@ -11,8 +11,7 @@ public class Paddles extends Subsystem
 
     public Paddles()
     {
-        //leftServo.set(60);
-        //rightServo.set(60);
+        
         //leftServo.setSpeed(0.2);
         //rightServo.setSpeed(0.2);
     }
@@ -30,13 +29,13 @@ public class Paddles extends Subsystem
 
     public void openPaddles(int degrees)
     {
-        leftServo.setAngle(30);
-        rightServo.setAngle(150);
+        leftServo.setAngle(60);
+        rightServo.setAngle(120);
     }
 
     public void closePaddles()
     {
-        leftServo.setAngle(125);
-        rightServo.setAngle(50);
+        leftServo.setAngle(150);
+        rightServo.setAngle(30);
     }
 }
