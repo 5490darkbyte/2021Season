@@ -26,7 +26,7 @@ public class OpenPaddles extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      Robot.m_Paddles.openPaddles(90);
+      Robot.m_Paddles.openPaddles();
     
   }
 

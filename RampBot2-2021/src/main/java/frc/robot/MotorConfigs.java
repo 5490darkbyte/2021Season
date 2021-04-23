@@ -26,5 +26,5 @@ public class MotorConfigs
 
     // Shooter Configs
     // Best is 0.93
-    public static double shooterSpeed = 0.5;
+    public static double shooterSpeed = 1.0;
 }

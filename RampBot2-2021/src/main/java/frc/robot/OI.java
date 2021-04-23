@@ -137,8 +137,8 @@ public class OI {
 		button12 = new JoystickButton(m_joystick, 12);
 		aButton = new JoystickButton(xbox, 1);
 		bButton = new JoystickButton(xbox, 2);
-		yButton = new JoystickButton(xbox, 3);
-		xButton = new JoystickButton(xbox, 4);
+		xButton = new JoystickButton(xbox, 3);
+		yButton = new JoystickButton(xbox, 4);
 		
 		leftButton = new JoystickButton(xbox, 5);
 		rightButton = new JoystickButton(xbox, 6);
@@ -169,7 +169,7 @@ public class OI {
 		bButton.whileHeld(new Shoot(true));
 		//aButton.whileHeld(new Shoot(true));
 
-		yButton.whileHeld(new OpenPaddles());
+		xButton.whileHeld(new OpenPaddles());
 
 		//bButton.whileHeld(new Move1SideForward(-0.6));
 		

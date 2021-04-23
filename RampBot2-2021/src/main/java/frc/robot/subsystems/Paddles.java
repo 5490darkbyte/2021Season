@@ -27,7 +27,7 @@ public class Paddles extends Subsystem
     }
     
 
-    public void openPaddles(int degrees)
+    public void openPaddles()
     {
         leftServo.setAngle(60);
         rightServo.setAngle(120);
