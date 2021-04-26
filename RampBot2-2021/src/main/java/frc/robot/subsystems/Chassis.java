@@ -292,7 +292,6 @@ public class Chassis extends Subsystem {
 	}
 	public void moveRightForward(double speed)
 	{
-		SmartDashboard.putNumber("Right side velocity", rightDriveEncoder.getVelocity());
 		m_right.set(speed);
 	}
 
@@ -319,7 +318,7 @@ public class Chassis extends Subsystem {
 
 	public double getBusVoltage()
 	{
-		return leftDriveEncoder.getBusVoltage();
+		return rightDriveEncoder.getBusVoltage();
 	}
 }
 

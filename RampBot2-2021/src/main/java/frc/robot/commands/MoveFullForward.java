@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import java.io.FileWriter;
-import java.io.IOException;
 
 
 /**
@@ -14,15 +13,15 @@ import java.io.IOException;
  */
 public class MoveFullForward extends Command {
 
-    private FileWriter writer;
-
     private static int c = 0;
+
     private double speed;
-    private static double total = 0;
-    private static double[] speeds = new double[10];
-    private static double[] speeds2 = new double[1000];
+    private static double totalS = 0;
+
+    private static double[] testCycles = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+    int cycleInd = 0;
     
-    private static double[] voltages = new double[1000];
+    private static double totalV = 0;
 
     public MoveFullForward() {
         requires(Robot.m_Chassis);
@@ -37,15 +36,7 @@ public class MoveFullForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        try{
-            writer = new FileWriter("Velocity Data.csv");
-        }
-        catch(IOException e)
-        {
-            System.out.println("IO Error");
-        }
-        
-        
+          
 
     }
 
@@ -54,30 +45,36 @@ public class MoveFullForward extends Command {
         SmartDashboard.putNumber("moveFullForward c: ", c);
         c++;
 
-        // Commented out old version (use control + / to uncomment).
 
-        if (c<=145)
+        // Commented out old version (use control + / to uncomment).
+        if (cycleInd >= testCycles.length)
         {
-            Robot.m_Chassis.moveForward(speed);
+            Robot.m_Chassis.StopMotors();
+        }
+        
+        else if (c<60 && c%4 != 0)
+        {
+            Robot.m_Chassis.moveLeftForward(testCycles[cycleInd]);
+        }
+        else if (c<500)
+        {
+            Robot.m_Chassis.moveLeftForward(testCycles[cycleInd]);
             
-            if (c%30 == 0)
-            {
-                // try {
-                //     writer.write(Double.toString((Robot.m_Chassis.getLeftVelocity())));
-                //     SmartDashboard.putBoolean("Written", true);
-                // } catch (IOException e) {
-                //     // TODO Auto-generated catch block
-                //     e.printStackTrace();
-                // }
-                speeds[c/30] = Robot.m_Chassis.getLeftVelocity();
-                total += speeds[c/30];
-            }
+            totalS += Robot.m_Chassis.getLeftVelocity();
+            totalV += Robot.m_Chassis.getBusVoltage();
       
-            double ave = total / (c/5);
-            SmartDashboard.putNumber("Ave Left Spd", ave);
         }
         else{
-            Robot.m_Chassis.StopMotors();
+            double aveS = totalS / (110.0);
+            double aveV = totalV / (110.0);
+            
+            SmartDashboard.putNumber("Cycle"+testCycles[cycleInd]+"Vel", aveS);
+            SmartDashboard.putNumber("Cycle"+testCycles[cycleInd]+"Volt", aveV);
+
+            totalS = 0;
+            totalV = 0;
+            c = 0;
+            cycleInd ++;
         }
         
         
@@ -155,14 +152,7 @@ public class MoveFullForward extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-            Robot.m_Chassis.StopMotors();
-            SmartDashboard.putBoolean("Stopped", true);
-            try {
-                writer.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            
     }
 
     // Called when another command which requires one or more of the same
