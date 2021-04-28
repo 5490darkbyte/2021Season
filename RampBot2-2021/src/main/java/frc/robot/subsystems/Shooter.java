@@ -36,7 +36,7 @@ public class Shooter extends Subsystem {
     leftShooter.configOpenloopRamp(0, 0);
     leftShooter.setInverted(true);
 
-    //Motionmatic extra configurations
+    //Motionmagic extra configurations
     leftShooter.configMotionCruiseVelocity(MotorConfigs.redlineLeftCruiseVelocity);
     leftShooter.configMotionAcceleration(MotorConfigs.redlineLeftAccel);
 
@@ -45,7 +45,7 @@ public class Shooter extends Subsystem {
 		rightShooter.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		rightShooter.enableCurrentLimit(true);	
     rightShooter.configOpenloopRamp(0, 0);
-    //Additional Motionmatic configurations
+    //Additional Motionmagic configurations
     rightShooter.configMotionCruiseVelocity(MotorConfigs.redlineRightCruiseVelocity);
     leftShooter.configMotionAcceleration(MotorConfigs.redlineRightAccel);
     
