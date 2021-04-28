@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class UpperChute extends Subsystem
 {
-    // Chute belt motors and its settings
+    // Subsystem for the upper chute of the robot
     
     private WPI_TalonSRX upperMotor = new WPI_TalonSRX(RobotMap.upperChute);
 
@@ -20,12 +20,13 @@ public class UpperChute extends Subsystem
 
     public UpperChute()
     {
-        // Configuration for the motor
-        // We are using a VexPro CIM motor
+        
+    //Accesses 1st index of slowChute - 1st index is speed of upper chute 
     mySpeed = MotorConfigs.slowChuteSpeed[1];
 
-    // Configuration for the lower motor being used
-
+    /* Configuration for the Upper motor being used
+     Configuration for the motor
+     We are using a VexPro CIM motor*/
     upperMotor.configContinuousCurrentLimit(MotorConfigs.vexContinousCurrentLimit, 0);
     upperMotor.configPeakCurrentLimit(MotorConfigs.vexPeakCurrent, 0);
     upperMotor.configPeakCurrentDuration(MotorConfigs.vexPeakDuration, 0);
