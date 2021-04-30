@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
+//import io.github.pseudoresonance.pixy2api.Pixy2;
+//import io.github.pseudoresonance.pixy2api.links.SPILink;
 
 //import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -140,7 +142,7 @@ public class Robot extends TimedRobot {
 		
 		//SmartDashboard.putString("Camera", camera.readString());
 		//visionThread.start();
-		new Thread(() -> {
+		/*new Thread(() -> {
 			UsbCamera CameraFront = CameraServer.getInstance().startAutomaticCapture();
 			CameraFront.setVideoMode(PixelFormat.kYUYV, 320, 240, 30);
 		
@@ -150,8 +152,13 @@ public class Robot extends TimedRobot {
 			UsbCamera CameraBack = CameraServer.getInstance().startAutomaticCapture();
 			CameraBack.setVideoMode(PixelFormat.kYUYV, 320, 240, 30);
 		
-		}).start();
-		
+		}).start();*/
+
+	  /*Pixy2 pixy = Pixy2.createInstance(new SPILink());
+      pixy.init(); // Initializes the camera and prepares to send/receive data
+	  pixy.setLamp((byte) 0, (byte) 1); // Turns the LEDs on
+	  pixy.setLED(0, 255, 0); // Sets the RGB LED to purple
+		*/
 	}
 	/*public void ultrasonicSample() {
     	double range = ultra.getRangeInches(); // reads the range on the ultrasonic sensor

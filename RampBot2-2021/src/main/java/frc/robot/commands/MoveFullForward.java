@@ -54,13 +54,13 @@ public class MoveFullForward extends Command {
         
         else if (c<60 || c%4 != 0)
         {
-            Robot.m_Chassis.moveRightForward(testCycles[cycleInd]);
+            Robot.m_Chassis.moveLeftForward(testCycles[cycleInd]);
         }
         else if (c<500)
         {
-            Robot.m_Chassis.moveRightForward(testCycles[cycleInd]);
+            Robot.m_Chassis.moveLeftForward(testCycles[cycleInd]);
             
-            totalS += Robot.m_Chassis.getRightVelocity();
+            totalS += Robot.m_Chassis.getLeftVelocity();
             totalV += Robot.m_Chassis.getBusVoltage();
       
         }

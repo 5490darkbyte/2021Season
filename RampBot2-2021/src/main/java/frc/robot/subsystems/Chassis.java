@@ -318,7 +318,7 @@ public class Chassis extends Subsystem {
 
 	public double getBusVoltage()
 	{
-		return rightDriveEncoder.getBusVoltage();
+		return leftDriveEncoder.getBusVoltage();
 	}
 }
 
