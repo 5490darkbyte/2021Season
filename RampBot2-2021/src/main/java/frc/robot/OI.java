@@ -7,25 +7,24 @@
 
 package frc.robot;
 
-import frc.robot.commands.TransferToForward;
-
-import frc.robot.commands.TransferToBack;
+// import frc.robot.commands.TransferToForward;
+// import frc.robot.commands.TransferToBack;
+// import frc.robot.commands.LiftDown;
+// import frc.robot.commands.LiftSwitch;
+// //import frc.robot.commands.TestSequencer;
+// import frc.robot.commands.LiftScale;
+// //import frc.robot.commands.LiftSetpoint;
+// import frc.robot.commands.LiftHook;
+// import frc.robot.commands.LiftManualMove;
+// import frc.robot.commands.LiftRobot;   // same as lift down, but may be partial
 
 import frc.robot.commands.MoveFullForward;
 
-import frc.robot.commands.LiftDown;
-import frc.robot.commands.LiftSwitch;
 import frc.robot.commands.Move1SideForward;
 import frc.robot.commands.EnableFastChute;
 import frc.robot.commands.MoveLowerChute;
 import frc.robot.commands.MoveUpperChute;
 import frc.robot.commands.MoveFullChute;
-//import frc.robot.commands.TestSequencer;
-import frc.robot.commands.LiftScale;
-//import frc.robot.commands.LiftSetpoint;
-import frc.robot.commands.LiftHook;
-import frc.robot.commands.LiftManualMove;
-import frc.robot.commands.LiftRobot;   // same as lift down, but may be partial
 
 import frc.robot.commands.HatchClose;
 import frc.robot.commands.HatchOpen;

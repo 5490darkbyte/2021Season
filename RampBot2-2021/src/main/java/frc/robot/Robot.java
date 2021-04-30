@@ -28,12 +28,13 @@ import frc.robot.ball;
 import frc.robot.commands.DriveRobot;
 //import frc.robot.commands.GripperOpen;
 //import frc.robot.commands.LiftDown;
-import frc.robot.commands.TransferToForward;
-//import frc.robot.commands.WinchToOperate;
+// import frc.robot.commands.TransferToForward;
+// //import frc.robot.commands.WinchToOperate;
+// //import frc.robot.subsystems.Gripper;
+// import frc.robot.subsystems.Lift;
+
 import frc.robot.subsystems.Chassis;
 
-//import frc.robot.subsystems.Gripper;
-import frc.robot.subsystems.Lift;
 
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.LowerChute;
@@ -87,7 +88,7 @@ public class Robot extends TimedRobot {
 	//Ultrasonic ultra = new Ultrasonic(21,21);
 	// create our assemblies..
 	public static Chassis m_Chassis;
-	public static Lift m_Lift;
+	// public static Lift m_Lift;
 
 	public static Shooter m_Shoot;
 	public static OI m_oi;

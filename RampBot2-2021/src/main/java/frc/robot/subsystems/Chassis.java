@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Encoder;
 
-import frc.robot.commands.LiftManualMove;
+// import frc.robot.commands.LiftManualMove;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -321,5 +321,3 @@ public class Chassis extends Subsystem {
 		return leftDriveEncoder.getBusVoltage();
 	}
 }
-
-

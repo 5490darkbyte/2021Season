@@ -1,21 +1,21 @@
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 
-//import edu.wpi.first.wpilibj.command.Command;
+// //import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class LiftRobot extends LiftSetpoint {
+// /**
+//  *
+//  */
+// public class LiftRobot extends LiftSetpoint {
 
-    	//TODO determine exact value for switch
-    private static final double ballpos = 5; // mm
+//     	//TODO determine exact value for switch
+//     private static final double ballpos = 5; // mm
     
-    public LiftRobot() {
+//     public LiftRobot() {
 
-        super(ballpos);
+//         super(ballpos);
 
-    	requires(Robot.m_Lift);
-    }
-}
+//     	requires(Robot.m_Lift);
+//     }
+// }

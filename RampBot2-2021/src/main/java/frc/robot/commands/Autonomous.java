@@ -1,68 +1,68 @@
-package frc.robot.commands;
+// package frc.robot.commands;
 
-import frc.robot.Robot;
+// import frc.robot.Robot;
 
-import edu.wpi.first.wpilibj.command.Command;
+// import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
-public class Autonomous extends Command {
+// /**
+//  *
+//  */
+// public class Autonomous extends Command {
 
-	private enum AutoState {
-		Start,
-		Winch,
-		Done,
-		Error,
-	}
+// 	private enum AutoState {
+// 		Start,
+// 		Winch,
+// 		Done,
+// 		Error,
+// 	}
 	
-	private AutoState state;
+// 	private AutoState state;
 	
 	
-    public Autonomous() {
-    	requires(Robot.m_Chassis);
-    	requires(Robot.m_Lift);
+//     public Autonomous() {
+//     	requires(Robot.m_Chassis);
+//     	requires(Robot.m_Lift);
     	
-    }
+//     }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	state = AutoState.Start;
-    }
+//     // Called just before this Command runs the first time
+//     protected void initialize() {
+//     	state = AutoState.Start;
+//     }
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+//     // Called repeatedly when this Command is scheduled to run
+//     protected void execute() {
     	
-    	switch(state) {
-    		case Start:
-    			state =  AutoState.Winch;
-    			break;
-    		case Winch:
-    			state =  AutoState.Done;
-    			break;
-    		case Done:
-    			break;
-    		case Error:
-    			break;
-    		default:
-    			state =  AutoState.Error;
-    			break;
+//     	switch(state) {
+//     		case Start:
+//     			state =  AutoState.Winch;
+//     			break;
+//     		case Winch:
+//     			state =  AutoState.Done;
+//     			break;
+//     		case Done:
+//     			break;
+//     		case Error:
+//     			break;
+//     		default:
+//     			state =  AutoState.Error;
+//     			break;
     		
-    	}
+//     	}
     	
-    }
+//     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return state == AutoState.Done;
-    }
+//     // Make this return true when this Command no longer needs to run execute()
+//     protected boolean isFinished() {
+//         return state == AutoState.Done;
+//     }
 
-    // Called once after isFinished returns true
-    protected void end() {
-    }
+//     // Called once after isFinished returns true
+//     protected void end() {
+//     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
-}
+//     // Called when another command which requires one or more of the same
+//     // subsystems is scheduled to run
+//     protected void interrupted() {
+//     }
+// }
