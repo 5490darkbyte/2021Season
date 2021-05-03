@@ -39,7 +39,7 @@ public class Move1SideForward extends Command {
     // true = left side
     // false = right side
     protected void execute() {
-        Robot.m_Chassis.move1Side(speed, true);
+        Robot.m_Chassis.move1Side(speed, false);
         SmartDashboard.putNumber("move 1 side speed ", speed);
     }
 

@@ -13,8 +13,8 @@ import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.cameraserver.CameraServer;
-//import io.github.pseudoresonance.pixy2api.Pixy2;
-//import io.github.pseudoresonance.pixy2api.links.SPILink;
+import io.github.pseudoresonance.pixy2api.*;
+import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 //import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -99,6 +99,10 @@ public class Robot extends TimedRobot {
 	Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
+
+	private Pixy2 pixycam;
+	boolean isCamera = false;
+	int state = -1;
 	
 	@Override
 	/**
@@ -130,6 +134,7 @@ public class Robot extends TimedRobot {
 		m_autonomousCommand = new DriveRobot();
 		
 		
+		pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
 		// instantiate the command used for the autonomous period
 		// add version of auto operation here..
 		//m_chooser.setDefaultOption("Basic Start", new TransferToForward());
@@ -242,9 +247,19 @@ public class Robot extends TimedRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
+		
+		if (!isCamera)
+		{
+			state = pixycam.init(1);
 		}
+		isCamera = state >= 0;
+
+		SmartDashboard.putBoolean("Camera", isCamera);
+		
+		
+		/*if (m_autonomousCommand != null) {
+			m_autonomousCommand.cancel();
+		}*/
 		//new HatchClose();
 	}
 
