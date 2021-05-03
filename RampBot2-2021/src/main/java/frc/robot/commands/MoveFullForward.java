@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import java.util.ArrayList;
 import java.io.FileWriter;
 
-
 /**
  *
  */
@@ -36,8 +35,6 @@ public class MoveFullForward extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-          
-
     }
 
     // Called repeatedly when this Command is scheduled to run

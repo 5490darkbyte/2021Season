@@ -36,8 +36,11 @@ public class Move1SideForward extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    // true = left side
+    // false = right side
     protected void execute() {
-        Robot.m_Chassis.move1Side(speed, false);
+        Robot.m_Chassis.move1Side(speed, true);
+        SmartDashboard.putNumber("move 1 side speed ", speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
