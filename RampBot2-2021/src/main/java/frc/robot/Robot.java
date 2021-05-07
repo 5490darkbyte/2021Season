@@ -38,7 +38,8 @@ import frc.robot.subsystems.Chassis;
 
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.LowerChute;
-import frc.robot.subsystems.Paddles;
+// import frc.robot.subsystems.Paddles;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.UpperChute;
 
 // Subsystems with vision
@@ -94,7 +95,8 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static LowerChute m_LowerChute;
 	public static UpperChute m_UpperChute;
-	public static Paddles m_Paddles;
+	// public static Paddles m_Paddles;
+	public static Collector m_Collector;
 	
 	Command m_autonomousCommand;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -126,7 +128,8 @@ public class Robot extends TimedRobot {
 		m_Shoot = new Shooter();
 		m_LowerChute = new LowerChute();
 		m_UpperChute = new UpperChute();
-		m_Paddles = new Paddles();
+		// m_Paddles = new Paddles();
+		m_Collector = new Collector();
 
 
 		m_oi = new OI();

@@ -30,7 +30,7 @@ import frc.robot.commands.HatchClose;
 import frc.robot.commands.HatchOpen;
 import frc.robot.commands.Shoot;
 
-import frc.robot.commands.OpenPaddles;
+// import frc.robot.commands.OpenPaddles;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -168,7 +168,7 @@ public class OI {
 		// bButton.whileHeld(new Shoot(true));
 		//aButton.whileHeld(new Shoot(true));
 
-		xButton.whileHeld(new OpenPaddles());
+		// xButton.whileHeld(new OpenPaddles());
 
 		bButton.whileHeld(new MoveFullForward());
 		//bButton.whileHeld(new Move1SideForward(0.1));
