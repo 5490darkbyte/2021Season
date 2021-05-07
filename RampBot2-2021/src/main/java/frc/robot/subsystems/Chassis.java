@@ -295,10 +295,10 @@ public class Chassis extends Subsystem {
 		m_right.set(speed);
 	}
 
-	public void hatchOpen()
-	{
+	// public void hatchOpen()
+	// {
 		
-	}
+	// }
 
 	public double getLeftVelocity()
 	{

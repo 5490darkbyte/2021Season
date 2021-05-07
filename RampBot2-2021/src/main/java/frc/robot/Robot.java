@@ -38,7 +38,6 @@ import frc.robot.subsystems.Chassis;
 
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.LowerChute;
-// import frc.robot.subsystems.Paddles;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.UpperChute;
 
@@ -54,7 +53,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
-import frc.robot.commands.HatchClose;
+
 
 /*import frc.robot.subsystems.Winch;
 import frc.robot.subsystems.Gripper;
@@ -95,7 +94,6 @@ public class Robot extends TimedRobot {
 	public static OI m_oi;
 	public static LowerChute m_LowerChute;
 	public static UpperChute m_UpperChute;
-	// public static Paddles m_Paddles;
 	public static Collector m_Collector;
 	
 	Command m_autonomousCommand;
@@ -128,7 +126,6 @@ public class Robot extends TimedRobot {
 		m_Shoot = new Shooter();
 		m_LowerChute = new LowerChute();
 		m_UpperChute = new UpperChute();
-		// m_Paddles = new Paddles();
 		m_Collector = new Collector();
 
 

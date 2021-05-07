@@ -27,7 +27,7 @@ public class UpperChute extends Subsystem
     /* Configuration for the Upper motor being used
      Configuration for the motor
      We are using a VexPro CIM motor*/
-    upperMotor.configContinuousCurrentLimit(MotorConfigs.vexContinousCurrentLimit, 0);
+    upperMotor.configContinuousCurrentLimit(MotorConfigs.vexContinuousCurrentLimit, 0);
     upperMotor.configPeakCurrentLimit(MotorConfigs.vexPeakCurrent, 0);
     upperMotor.configPeakCurrentDuration(MotorConfigs.vexPeakDuration, 0);
     upperMotor.enableCurrentLimit(true);	

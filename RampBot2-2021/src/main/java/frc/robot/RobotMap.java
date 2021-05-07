@@ -35,7 +35,7 @@ public class RobotMap {
 	public static int shooter1 = 11;
 	public static int winch = 12;
 	public static int shooter2  = 13;
-	public static int liftRight = 14;
+	public static int collector = 14;
 
 	public static int lowerChute = 15;
 	public static int upperChute = 16;	

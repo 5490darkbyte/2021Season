@@ -25,7 +25,7 @@ public class LowerChute extends Subsystem
         mySpeed = MotorConfigs.slowChuteSpeed[0];
 
         // Configuration for the lower motor being used
-        lowerMotor.configContinuousCurrentLimit(MotorConfigs.vexContinousCurrentLimit, 0);
+        lowerMotor.configContinuousCurrentLimit(MotorConfigs.vexContinuousCurrentLimit, 0);
         lowerMotor.configPeakCurrentLimit(MotorConfigs.vexPeakCurrent, 0);
         lowerMotor.configPeakCurrentDuration(MotorConfigs.vexPeakDuration, 0);
         lowerMotor.enableCurrentLimit(true);	

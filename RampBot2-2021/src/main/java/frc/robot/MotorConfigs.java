@@ -1,10 +1,10 @@
 package frc.robot;
 public class MotorConfigs
 {
-    public static final int universalCurrentLimit = 40;
+    public static final int universalCurrentLimit = 39;
     public static final int universalPeakDuration = 100;
     // VEX Robotics CIM Motors
-    public static final int vexContinousCurrentLimit = universalCurrentLimit;
+    public static final int vexContinuousCurrentLimit = universalCurrentLimit;
     public static final int vexPeakCurrent = 60;
     public static final int vexPeakDuration = universalPeakDuration;
 

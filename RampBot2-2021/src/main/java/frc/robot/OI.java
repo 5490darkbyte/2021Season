@@ -21,16 +21,14 @@ package frc.robot;
 import frc.robot.commands.MoveFullForward;
 
 import frc.robot.commands.Move1SideForward;
+import frc.robot.commands.MoveCollectorForward;
 import frc.robot.commands.EnableFastChute;
 import frc.robot.commands.MoveLowerChute;
 import frc.robot.commands.MoveUpperChute;
 import frc.robot.commands.MoveFullChute;
 
-import frc.robot.commands.HatchClose;
-import frc.robot.commands.HatchOpen;
-import frc.robot.commands.Shoot;
 
-// import frc.robot.commands.OpenPaddles;
+import frc.robot.commands.Shoot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -166,9 +164,9 @@ public class OI {
 		rightButton.whileHeld(new MoveUpperChute());
 		
 		// bButton.whileHeld(new Shoot(true));
-		//aButton.whileHeld(new Shoot(true));
+		// aButton.whileHeld(new Shoot(true));
 
-		// xButton.whileHeld(new OpenPaddles());
+		xButton.whileHeld(new MoveCollectorForward());
 
 		bButton.whileHeld(new MoveFullForward());
 		//bButton.whileHeld(new Move1SideForward(0.1));

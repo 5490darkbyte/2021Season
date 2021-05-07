@@ -14,11 +14,15 @@ import edu.wpi.first.wpilibj.Joystick;
 public class Collector extends Subsystem
 {
     
-    Servo leftServo = new Servo(0);
-    Servo rightServo = new Servo(1);
+    WPI_TalonSRX motor = new WPI_TalonSRX(RobotMap.collector);
 
     public Collector()
     {
+        motor.configContinuousCurrentLimit(MotorConfigs.vexContinuousCurrentLimit, 0);
+		motor.configPeakCurrentLimit(MotorConfigs.vexPeakCurrent, 0);
+		motor.configPeakCurrentDuration(MotorConfigs.vexPeakDuration, 0);
+		motor.enableCurrentLimit(true);	
+        motor.configOpenloopRamp(0, 0);
 
     }
 
@@ -30,5 +34,14 @@ public class Collector extends Subsystem
     public void initDefaultCommand()
     {
         
+    }
+
+    public void spinMotor(double speed)
+    {
+        motor.set(0.1);
+    }
+    public void stop()
+    {
+        motor.set(0);
     }
 }
