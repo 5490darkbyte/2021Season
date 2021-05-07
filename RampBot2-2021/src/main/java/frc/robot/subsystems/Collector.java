@@ -16,6 +16,8 @@ public class Collector extends Subsystem
     
     WPI_TalonSRX motor = new WPI_TalonSRX(RobotMap.collector);
 
+    //DigitalInput upLimitSwitch = new DigitalInput(RobotMap.mtrLift());
+
     public Collector()
     {
         motor.configContinuousCurrentLimit(MotorConfigs.vexContinuousCurrentLimit, 0);
@@ -44,4 +46,6 @@ public class Collector extends Subsystem
     {
         motor.set(0);
     }
+
+
 }
