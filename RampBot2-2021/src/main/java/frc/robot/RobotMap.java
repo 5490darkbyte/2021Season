@@ -33,9 +33,11 @@ public class RobotMap {
 
 	// the following are CAN addresses for the SparkMAX
 	public static int shooter1 = 11;
-	public static int winch = 12;
+	// public static int winch = 12;
+	public static int collector = 12; // has winch port for now
+
 	public static int shooter2  = 13;
-	public static int collector = 14;
+	// public static int collector = 14;
 
 	public static int lowerChute = 15;
 	public static int upperChute = 16;	
@@ -45,7 +47,7 @@ public class RobotMap {
 	
 
 	// PWM
-	public static int  mtrHatch = 0;
+	public static int mtrHatch = 0;
 	
 	// IMU Reservations
 	// The IMU is located on the RoboRio MXP port and uses some of the DIO channels

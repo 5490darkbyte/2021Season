@@ -40,12 +40,10 @@ public class Collector extends Subsystem
 
     public void spinMotor(double speed)
     {
-        motor.set(0.1);
+        motor.set(speed);
     }
     public void stop()
     {
         motor.set(0);
     }
-
-
 }

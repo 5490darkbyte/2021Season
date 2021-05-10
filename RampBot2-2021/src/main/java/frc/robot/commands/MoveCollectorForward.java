@@ -26,9 +26,7 @@ public class MoveCollectorForward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.m_Collector.spinMotor(0.1);
-
-    
+      Robot.m_Collector.spinMotor(0.1);
   }
 
   // Called once the command ends or is interrupted.
