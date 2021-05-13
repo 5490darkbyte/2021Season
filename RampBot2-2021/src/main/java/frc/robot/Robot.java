@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
 	public static Chassis m_Chassis;
 	// public static Lift m_Lift;
 
-	public static Shooter m_Shoot;
+	public static Shooter m_Shooter;
 	public static OI m_oi;
 	public static LowerChute m_LowerChute;
 	public static UpperChute m_UpperChute;
@@ -123,7 +123,7 @@ public class Robot extends TimedRobot {
 		//m_Lift = new Lift();
 		//m_CAM = new ClimbingCAM();		
 		//m_VAC = new Vacuum();
-		m_Shoot = new Shooter();
+		m_Shooter = new Shooter();
 		m_LowerChute = new LowerChute();
 		m_UpperChute = new UpperChute();
 		m_Collector = new Collector();

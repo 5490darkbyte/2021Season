@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
@@ -20,10 +21,14 @@ public class Shooter extends Subsystem {
   private WPI_TalonSRX rightShooter = new WPI_TalonSRX(RobotMap.shooter2);
 
 
+
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
 
   private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
   private CANCoder rightEncoder = new CANCoder(RobotMap.shooter2);
+
+  private PIDController leftController = new PIDController(0, 0, 0);
+  
 
   
   public Shooter() {
@@ -87,6 +92,7 @@ public class Shooter extends Subsystem {
   public void spinMotors(double speed)
   {
     m_shooterMotors.set(speed);
+    
   }
   public void stop()
   {

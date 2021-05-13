@@ -164,8 +164,8 @@ public class OI {
 		rightButton.whileHeld(new MoveUpperChute());
 		
 		// bButton.whileHeld(new Shoot(true));
-		aButton.whileHeld(new Shoot(true));
-		// aButton.whileHeld(new SpinCollector());
+		yButton.whileHeld(new Shoot(true));
+		aButton.whileHeld(new SpinCollector());
 
 		xButton.whileHeld(new MoveCollectorForward());
 		bButton.whileHeld(new MoveCollectorBackward());

@@ -21,7 +21,7 @@ public class Shoot extends Command {
   //Constructor for the command
   public Shoot(boolean isForward) {
     this.isForward = isForward;
-    requires(Robot.m_Shoot);
+    requires(Robot.m_Shooter);
   }
 
   // Called when the command is initially scheduled.
@@ -33,10 +33,10 @@ public class Shoot extends Command {
   @Override
   public void execute() {
     
-    Robot.m_Shoot.spinMotors(true);
+    Robot.m_Shooter.spinMotors(true);
     if (c>=200 && c%4==0 && c<1000)
     {
-      sumSpeeds += Robot.m_Shoot.getLeftVelocity();
+      sumSpeeds += Robot.m_Shooter.getLeftVelocity();
     }
     else if (c==1000)
     {
@@ -50,7 +50,7 @@ public class Shoot extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    Robot.m_Shoot.stop();
+    Robot.m_Shooter.stop();
   }
 
   // Returns true when the command should end.
