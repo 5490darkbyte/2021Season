@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
 
 public class Collector extends Subsystem
 {
-    
+    WPI_TalonSRX motorWheels = new WPI_TalonSRX(RobotMap.collectorWheels);
     WPI_TalonSRX motor = new WPI_TalonSRX(RobotMap.collector);
 
     //DigitalInput upLimitSwitch = new DigitalInput(RobotMap.mtrLift());
@@ -26,6 +26,11 @@ public class Collector extends Subsystem
 		motor.enableCurrentLimit(true);	
         motor.configOpenloopRamp(0, 0);
 
+        motorWheels.configContinuousCurrentLimit(MotorConfigs.vexSmallContinuousCurrentLimit, 0);
+		motorWheels.configPeakCurrentLimit(MotorConfigs.vexSmallPeakCurrent, 0);
+		motorWheels.configPeakCurrentDuration(MotorConfigs.vexSmallPeakDuration, 0);
+		motorWheels.enableCurrentLimit(true);	
+        motorWheels.configOpenloopRamp(0, 0);
     }
 
     @Override
@@ -45,5 +50,19 @@ public class Collector extends Subsystem
     public void stop()
     {
         motor.set(0);
+    }
+
+    public void spinWheels(double speed)
+    {
+        motorWheels.set(speed);
+        SmartDashboard.putNumber("spin wheels collector", speed);
+    }
+    public void spinWheels()
+    {
+        motorWheels.set(0.1);
+    }
+    public void stopWheels()
+    {
+        motorWheels.set(0);
     }
 }

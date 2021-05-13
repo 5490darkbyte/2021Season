@@ -8,6 +8,11 @@ public class MotorConfigs
     public static final int vexPeakCurrent = 60;
     public static final int vexPeakDuration = universalPeakDuration;
 
+    // VEX Robotics 775pro motor (smaller than VEX CIM motor)
+    public static final int vexSmallContinuousCurrentLimit = 20;
+    public static final int vexSmallPeakCurrent = 25;
+    public static final int vexSmallPeakDuration = universalPeakDuration;
+
     // Andymark Redline Motors
     public static final int redlineContinuousCurrentLimit = universalCurrentLimit;
     public static final int redlinePeakCurrent = 55;
@@ -26,5 +31,5 @@ public class MotorConfigs
 
     // Shooter Configs
     // Best is 0.93
-    public static final double shooterSpeed = 0.93;
+    public static final double shooterSpeed = 0.8;
 }

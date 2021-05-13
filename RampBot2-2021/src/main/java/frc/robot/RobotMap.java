@@ -31,18 +31,20 @@ public class RobotMap {
 	public static int midRightDrive = 5;
 	public static int frontRightDrive = 6;
 
+	// small motor on collector. Not sure what ports to use
+	// public static int collectorWheels = 7;
+
 	// the following are CAN addresses for the SparkMAX
+	/* Left side of the robot, back to front */
 	public static int shooter1 = 11;
-	// public static int winch = 12;
 	public static int collector = 12; // has winch port for now
-
 	public static int shooter2  = 13;
-	// public static int collector = 14;
 
+	/* Right side of the robot, back to front */
+	public static int collectorWheels = 14;
 	public static int lowerChute = 15;
 	public static int upperChute = 16;	
 	
-
 	// the following are CAN addresses for the Spark's	 
 	
 
