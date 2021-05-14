@@ -168,8 +168,8 @@ public class OI {
 		aButton.whileHeld(new SpinCollector());
 
 		xButton.whileHeld(new MoveCollectorForward());
-		bButton.whileHeld(new MoveCollectorBackward());
-		// bButton.whileHeld(new MoveFullForward());
+		//bButton.whileHeld(new MoveCollectorBackward());
+		bButton.whileHeld(new MoveFullForward());
 		//bButton.whileHeld(new Move1SideForward(0.1));
 		
 

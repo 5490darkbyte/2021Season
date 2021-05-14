@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj.Joystick;
 
+import frc.robot.commands.CollectorCommand;
+
 public class Collector extends Subsystem
 {
     WPI_TalonSRX motorWheels = new WPI_TalonSRX(RobotMap.collectorWheels);
@@ -40,23 +42,24 @@ public class Collector extends Subsystem
 
     public void initDefaultCommand()
     {
+        setDefaultCommand(new CollectorCommand());
+    }
+
+    public void rotateCollector(Joystick xbox)
+    {   
+        double minThrottle = 0.05;
+        double moveSpeed = (xbox.getY()*0.3);
+        if (moveSpeed >= minThrottle)
+        {
+            motor.set(moveSpeed);
+        }
+        else
+        {
+            motor.set(0);
+        }
         
     }
 
-    public void spinMotor(double speed)
-    {
-        motor.set(speed);
-    }
-    public void stop()
-    {
-        motor.set(0);
-    }
-
-    public void spinWheels(double speed)
-    {
-        motorWheels.set(speed);
-        SmartDashboard.putNumber("spin wheels collector", speed);
-    }
     public void spinWheels()
     {
         motorWheels.set(0.1);
