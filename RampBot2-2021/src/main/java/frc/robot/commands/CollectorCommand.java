@@ -23,9 +23,13 @@ public class CollectorCommand extends Command {
     protected void execute() {    	
 
         Robot.m_Collector.rotateCollector(Robot.m_oi.getXbox());
-        if (Robot.m_oi.getXbox().getTopPressed())
+        if (Robot.m_oi.getXbox().getX()>0.2)
         {
             Robot.m_Collector.spinWheels();
+        }
+        else
+        {
+            Robot.m_Collector.stopWheels();
         }
 
     }

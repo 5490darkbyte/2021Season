@@ -26,7 +26,7 @@ public class SpinCollector extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      Robot.m_Collector.spinWheels(0.4);
+      Robot.m_Collector.spinWheels();
   }
 
   // Called once the command ends or is interrupted.

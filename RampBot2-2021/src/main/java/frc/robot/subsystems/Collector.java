@@ -49,9 +49,14 @@ public class Collector extends Subsystem
     {   
         double minThrottle = 0.05;
         double moveSpeed = (xbox.getY()*0.3);
-        if (moveSpeed >= minThrottle)
+        if (Math.abs(moveSpeed) >= minThrottle)
         {
-            motor.set(moveSpeed);
+            if (moveSpeed < 0) {
+                motor.set(moveSpeed*0.75);
+            }
+            else {
+                motor.set(moveSpeed);
+            }
         }
         else
         {
@@ -62,7 +67,7 @@ public class Collector extends Subsystem
 
     public void spinWheels()
     {
-        motorWheels.set(0.1);
+        motorWheels.set(0.25);
     }
     public void stopWheels()
     {
