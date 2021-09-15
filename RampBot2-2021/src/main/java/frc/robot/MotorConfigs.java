@@ -32,4 +32,7 @@ public class MotorConfigs
     // Shooter Configs
     // Best is 0.93
     public static final double shooterSpeed = 0.8;
+
+    // Collections Configs
+    public static final double maxCollectorAngle = 202.6;
 }

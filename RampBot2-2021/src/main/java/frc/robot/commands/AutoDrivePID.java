@@ -4,19 +4,15 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.Collector;
-import frc.robot.Robot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 
-/** An example command that uses an example subsystem. */
-public class MoveCollectorBackward extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
+public class AutoDrivePID extends CommandBase {
+  /** Creates a new AutoDrivePID. */
+  double setPos;
 
-  //Constructor for the command
-  public MoveCollectorBackward() {
-    requires(Robot.m_Collector);
- 
+  public AutoDrivePID(double setPos) {
+    this.setPos = setPos;
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -26,14 +22,12 @@ public class MoveCollectorBackward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      Robot.m_Collector.rotateCollector(-0.1);
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end() {
-    Robot.m_Collector.rotateCollector(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

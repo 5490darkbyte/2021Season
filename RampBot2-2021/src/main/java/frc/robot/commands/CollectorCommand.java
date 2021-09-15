@@ -10,18 +10,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class CollectorCommand extends Command {
 	
-
+    static int c = 0;
     public CollectorCommand() {
     	requires(Robot.m_Collector);    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {    	
-
+        c++;
         Robot.m_Collector.rotateCollector(Robot.m_oi.getXbox());
         if (Robot.m_oi.getXbox().getX()>0.2)
         {
@@ -31,6 +32,8 @@ public class CollectorCommand extends Command {
         {
             Robot.m_Collector.stopWheels();
         }
+        SmartDashboard.putNumber("Encoder Position", Robot.m_Collector.getEncoderPosition());
+        SmartDashboard.putNumber("Collect count", c);
 
     }
 

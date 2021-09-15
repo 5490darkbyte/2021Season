@@ -34,16 +34,19 @@ public class Shoot extends Command {
   public void execute() {
     
     Robot.m_Shooter.spinMotors(true);
-    if (c>=200 && c%4==0 && c<1000)
-    {
-      sumSpeeds += Robot.m_Shooter.getLeftVelocity();
-    }
-    else if (c==1000)
-    {
-      SmartDashboard.putNumber("MaxSpeed", sumSpeeds/200);
-    }
+
+    // if (c>=200 && c%4==0 && c<1000)
+    // {
+    //   sumSpeeds += Robot.m_Shooter.getLeftVelocity();
+    // }
+    // else if (c==1000)
+    // {
+    //   SmartDashboard.putNumber("MaxSpeed", sumSpeeds/200);
+    // }
     
-    c++;
+    // c++;
+
+
 
   }
 

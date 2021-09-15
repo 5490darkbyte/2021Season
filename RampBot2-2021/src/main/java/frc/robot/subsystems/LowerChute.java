@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
 
+import com.ctre.phoenix.motorcontrol.SensorCollection;
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -30,6 +31,8 @@ public class LowerChute extends Subsystem
         lowerMotor.configPeakCurrentDuration(MotorConfigs.vexPeakDuration, 0);
         lowerMotor.enableCurrentLimit(true);	
         lowerMotor.configOpenloopRamp(0, 0);
+
+        
     
     }
 
@@ -63,13 +66,17 @@ public class LowerChute extends Subsystem
     {
         
         // Set to a low speed starting off
+
         lowerMotor.set(speed);
+        
+        
     }
 
     public void stop()
     {
         lowerMotor.set(0);
     }
+
 
     
 }

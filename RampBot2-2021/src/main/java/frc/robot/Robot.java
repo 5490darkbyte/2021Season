@@ -135,6 +135,8 @@ public class Robot extends TimedRobot {
 		
 		
 		pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
+
+		
 		// instantiate the command used for the autonomous period
 		// add version of auto operation here..
 		//m_chooser.setDefaultOption("Basic Start", new TransferToForward());

@@ -21,9 +21,12 @@ package frc.robot;
 import frc.robot.commands.MoveFullForward;
 
 import frc.robot.commands.Move1SideForward;
+import frc.robot.commands.MoveCollectorBackward;
 //import frc.robot.commands.MoveCollectorBackward;
 import frc.robot.commands.MoveCollectorForward;
+import frc.robot.commands.AutoDrivePID;
 import frc.robot.commands.EnableFastChute;
+import frc.robot.commands.FullRetractCollectorPID;
 import frc.robot.commands.MoveLowerChute;
 import frc.robot.commands.MoveUpperChute;
 import frc.robot.commands.MoveFullChute;
@@ -166,12 +169,18 @@ public class OI {
 		// bButton.whileHeld(new Shoot(true));
 		yButton.whileHeld(new Shoot(true));
 		aButton.whileHeld(new SpinCollector());
+		xButton.whileHeld(new FullRetractCollectorPID());
 
-		xButton.whileHeld(new MoveCollectorForward());
-		//bButton.whileHeld(new MoveCollectorBackward());
-		bButton.whileHeld(new MoveFullForward());
+		// xButton.whileHeld(new MoveCollectorForward());
+		// bButton.whileHeld(new MoveCollectorBackward());
+
+		// thjis was for testing
+		//bButton.whileHeld(new MoveFullForward());
 		//bButton.whileHeld(new Move1SideForward(0.1));
 		
+		//testing pid ----
+		// button7.whileHeld(new AutoDrivePID(10));
+
 
 		/*
 		liftManualDown.whileHeld(new LiftManualMove(-1, 0.5));

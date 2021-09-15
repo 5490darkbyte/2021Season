@@ -88,12 +88,20 @@ public class Shooter extends Subsystem {
       {
         m_shooterMotors.set(MotorConfigs.shooterSpeed*-1);
       }
+
+      
+    SmartDashboard.putNumber("Left Shooter", leftEncoder.getPosition());
   }
   public void spinMotors(double speed)
   {
     m_shooterMotors.set(speed);
     
   }
+
+  public void pidSpinMotors(double speed) {
+
+  }
+
   public void stop()
   {
     m_shooterMotors.set(0);
@@ -101,6 +109,7 @@ public class Shooter extends Subsystem {
 
   public double getLeftVelocity() {
     return leftShooter.getSensorCollection().getQuadratureVelocity();
+    
   }
   /*public double getPWPosition() {
     return leftShooter.getSensorCollection().getPulseWidthPosition();
