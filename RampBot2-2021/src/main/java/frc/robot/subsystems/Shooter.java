@@ -19,17 +19,17 @@ public class Shooter extends Subsystem {
   
   private WPI_TalonSRX leftShooter = new WPI_TalonSRX(RobotMap.shooter1);
   private WPI_TalonSRX rightShooter = new WPI_TalonSRX(RobotMap.shooter2);
-
-
-
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
-
-  private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
-  private CANCoder rightEncoder = new CANCoder(RobotMap.shooter2);
-
-  private PIDController leftController = new PIDController(0, 0, 0);
   
 
+
+
+  // private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
+  // private CANCoder rightEncoder = new CANCoder(RobotMap.shooter2);
+
+  private PIDController leftController = new PIDController(0.01, 0, 0);
+  private PIDController rightController = new PIDController(0.01, 0, 0);
+  
   
   public Shooter() {
     
@@ -54,7 +54,16 @@ public class Shooter extends Subsystem {
     rightShooter.configMotionCruiseVelocity(MotorConfigs.redlineRightCruiseVelocity);
     leftShooter.configMotionAcceleration(MotorConfigs.redlineRightAccel);
     
+    leftShooter.config_kP(0, 0.01);
+    leftShooter.config_kI(0, 0.01);
+    leftShooter.config_kD(0, 0.01);
+
+    rightShooter.config_kP(0, 0.01);
+    rightShooter.config_kI(0, 0.01);
+    rightShooter.config_kD(0, 0.01);
     
+    
+
     // Configuration for the encoders
     //m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);
     
@@ -69,6 +78,14 @@ public class Shooter extends Subsystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+
+       
+    SmartDashboard.putNumber("shooter Left", leftShooter.getSensorCollection().getQuadratureVelocity());
+    
+    // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
+
+    SmartDashboard.putNumber("shooter Right", rightShooter.getSensorCollection().getQuadratureVelocity());
+    
   }
 
   @Override
@@ -90,7 +107,13 @@ public class Shooter extends Subsystem {
       }
 
       
-    SmartDashboard.putNumber("Left Shooter", leftEncoder.getPosition());
+    SmartDashboard.putNumber("shooter Left", leftShooter.getSensorCollection().getQuadratureVelocity());
+    
+    // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
+
+    SmartDashboard.putNumber("shooter Right", rightShooter.getSensorCollection().getQuadratureVelocity());
+    
+    // SmartDashboard.putNumber("shooter Right v", rightEncoder.getVelocity());
   }
   public void spinMotors(double speed)
   {
