@@ -169,7 +169,7 @@ public class OI {
 		// bButton.whileHeld(new Shoot(true));
 		yButton.whileHeld(new Shoot(true));
 		aButton.whileHeld(new SpinCollector());
-		xButton.whileHeld(new FullRetractCollectorPID());
+		xButton.whenPressed(new FullRetractCollectorPID());
 
 		// xButton.whileHeld(new MoveCollectorForward());
 		// bButton.whileHeld(new MoveCollectorBackward());

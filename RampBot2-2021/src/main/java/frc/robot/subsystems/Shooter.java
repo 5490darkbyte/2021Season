@@ -7,6 +7,10 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
 
+import java.util.ResourceBundle.Control;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.TalonSRXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,8 +31,8 @@ public class Shooter extends Subsystem {
   // private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
   // private CANCoder rightEncoder = new CANCoder(RobotMap.shooter2);
 
-  private PIDController leftController = new PIDController(0.01, 0, 0);
-  private PIDController rightController = new PIDController(0.01, 0, 0);
+  //private PIDController leftController = new PIDController(0.01, 0, 0);
+  //private PIDController rightController = new PIDController(0.01, 0, 0);
   
   
   public Shooter() {
@@ -39,7 +43,7 @@ public class Shooter extends Subsystem {
 		leftShooter.configPeakCurrentDuration(MotorConfigs.redlinePeakDuration, 0);
 		leftShooter.enableCurrentLimit(true);	
     leftShooter.configOpenloopRamp(0, 0);
-    leftShooter.setInverted(true);
+    leftShooter.setInverted(true); // invert left shooter motor
 
     //Motionmagic extra configurations
     leftShooter.configMotionCruiseVelocity(MotorConfigs.redlineLeftCruiseVelocity);
@@ -53,14 +57,28 @@ public class Shooter extends Subsystem {
     //Additional Motionmagic configurations
     rightShooter.configMotionCruiseVelocity(MotorConfigs.redlineRightCruiseVelocity);
     leftShooter.configMotionAcceleration(MotorConfigs.redlineRightAccel);
-    
-    leftShooter.config_kP(0, 0.01);
-    leftShooter.config_kI(0, 0.01);
-    leftShooter.config_kD(0, 0.01);
 
-    rightShooter.config_kP(0, 0.01);
-    rightShooter.config_kI(0, 0.01);
-    rightShooter.config_kD(0, 0.01);
+    
+    //PID and Encoder Settings
+
+    leftShooter.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 150);
+    leftShooter.selectProfileSlot(0, 0);
+
+    // leftShooter.setSensorPhase(true);
+//TODO: extract coeficients to constants
+    leftShooter.config_kP(0, 0.02);
+    leftShooter.config_kI(0, 0*0.00005);
+    leftShooter.config_kD(0, 0.00);
+
+
+    //rightShooter.configre
+    
+    rightShooter.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 150);
+    rightShooter.selectProfileSlot(0, 0);
+
+    rightShooter.config_kP(0, 0.011);
+    rightShooter.config_kI(0, 0.00002);
+    rightShooter.config_kD(0, 0.00);
     
     
 
@@ -69,8 +87,6 @@ public class Shooter extends Subsystem {
     
       
     addChild("Motor I'm testing", leftShooter);
-    
-
 
 
   }
@@ -80,12 +96,26 @@ public class Shooter extends Subsystem {
     // This method will be called once per scheduler run
 
        
-    SmartDashboard.putNumber("shooter Left", leftShooter.getSensorCollection().getQuadratureVelocity());
+    SmartDashboard.putNumber("shooter Left",measuredUnitsTorpm(leftShooter.getSelectedSensorVelocity()));
     
     // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
 
-    SmartDashboard.putNumber("shooter Right", rightShooter.getSensorCollection().getQuadratureVelocity());
+    SmartDashboard.putNumber("shooter Right", measuredUnitsTorpm(rightShooter.getSelectedSensorVelocity()));
     
+           
+    // SmartDashboard.putNumber("shooter Left",measuredUnitsTorpm(leftShooter.getSensorCollection().getQuadratureVelocity()));
+
+    // SmartDashboard.putNumber("shooter Right", measuredUnitsTorpm(rightShooter.getSensorCollection().getQuadratureVelocity()));
+
+  }
+
+
+  double measuredUnitsTorpm(double measured) {
+    return (measured / 4096) * 600;
+  }
+  
+  double rpmtoMeasuredUnits(double rpm) {
+    return (rpm / 600) * 4096;
   }
 
   @Override
@@ -97,23 +127,18 @@ public class Shooter extends Subsystem {
 
   public void spinMotors(boolean isForward)
   {
+
       if (isForward)
       {
-        m_shooterMotors.set(MotorConfigs.shooterSpeed);
+        // m_shooterMotors.set(MotorConfigs.shooterSpeed);
+        // leftShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));
+        rightShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));
       }
       else
       {
-        m_shooterMotors.set(MotorConfigs.shooterSpeed*-1);
+        // m_shooterMotors.set(MotorConfigs.shooterSpeed*-1);
       }
 
-      
-    SmartDashboard.putNumber("shooter Left", leftShooter.getSensorCollection().getQuadratureVelocity());
-    
-    // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
-
-    SmartDashboard.putNumber("shooter Right", rightShooter.getSensorCollection().getQuadratureVelocity());
-    
-    // SmartDashboard.putNumber("shooter Right v", rightEncoder.getVelocity());
   }
   public void spinMotors(double speed)
   {
@@ -127,7 +152,9 @@ public class Shooter extends Subsystem {
 
   public void stop()
   {
-    m_shooterMotors.set(0);
+    leftShooter.set(ControlMode.Velocity, 0);
+    rightShooter.set(ControlMode.Velocity, 0);
+    // m_shooterMotors.set(0);
   }
 
   public double getLeftVelocity() {

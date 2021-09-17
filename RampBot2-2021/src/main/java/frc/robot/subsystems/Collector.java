@@ -63,32 +63,29 @@ public class Collector extends Subsystem
         double speedrange = .05-minimumMove;
 		double speed = (-speedrange*yAxis+1)/2;
         speed += minimumMove;
-        // SmartDashboard.putNumber("yAxis",yAxis);
-        if (yAxis < 0 && motor.getSensorCollection().isRevLimitSwitchClosed())
+
+        rotateCollector(speed*xbox.getY()*0.25);
+    }
+    public void rotateCollector(double speed)
+    {
+        if (speed < 0 && motor.getSensorCollection().isRevLimitSwitchClosed())
         {   
             // SmartDashboard.putNumber("yAxis",yAxis);
             encoder.setPosition(0);
             motor.set(0);
         }
-        else if (yAxis > 0 && getEncoderPosition() > MotorConfigs.maxCollectorAngle)
+        else if (speed > 0 && getEncoderPosition() > MotorConfigs.maxCollectorAngle)
         {
 
             motor.set(0);
         }
         else
         {
-            motor.set(speed*xbox.getY()*0.25);
+            motor.set(speed);
         }
-        
-        
-        
-        
-        
     }
-    public void rotateCollector(double speed)
-    {
-        motor.set(speed);
-    }
+
+    
     public void spinWheels()
     {
         motorWheels.set(0.25);
