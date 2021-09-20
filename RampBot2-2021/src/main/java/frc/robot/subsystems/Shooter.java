@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
 
+import java.util.ArrayList;
 import java.util.ResourceBundle.Control;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -26,6 +27,9 @@ public class Shooter extends Subsystem {
   private SpeedControllerGroup m_shooterMotors = new SpeedControllerGroup(leftShooter, rightShooter);
   
 
+  private double roulingAVGLength = 100;
+  private ArrayList<Double> roulingLeftValues = new ArrayList<Double>();
+  private ArrayList<Double> roulingRightValues = new ArrayList<Double>();
 
 
   // private CANCoder leftEncoder = new CANCoder(RobotMap.shooter1);
@@ -66,8 +70,8 @@ public class Shooter extends Subsystem {
 
     // leftShooter.setSensorPhase(true);
 //TODO: extract coeficients to constants
-    leftShooter.config_kP(0, 0.02);
-    leftShooter.config_kI(0, 0*0.00005);
+    leftShooter.config_kP(0, 0.011);
+    leftShooter.config_kI(0, 0.00002);
     leftShooter.config_kD(0, 0.00);
 
 
@@ -94,18 +98,37 @@ public class Shooter extends Subsystem {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
+    double leftv = measuredUnitsTorpm(leftShooter.getSelectedSensorVelocity());
+    double rightv = measuredUnitsTorpm(rightShooter.getSelectedSensorVelocity());
        
-    SmartDashboard.putNumber("shooter Left",measuredUnitsTorpm(leftShooter.getSelectedSensorVelocity()));
+    SmartDashboard.putNumber("shooter Left",leftv);
+    SmartDashboard.putNumber("shooter Right", rightv);
     
-    // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
-
-    SmartDashboard.putNumber("shooter Right", measuredUnitsTorpm(rightShooter.getSelectedSensorVelocity()));
-    
+    roulingLeftValues.add(leftv);
+    roulingRightValues.add(rightv);
            
-    // SmartDashboard.putNumber("shooter Left",measuredUnitsTorpm(leftShooter.getSensorCollection().getQuadratureVelocity()));
+    if (roulingLeftValues.size() > roulingAVGLength) {
+      roulingLeftValues.remove(0);
+    }
 
-    // SmartDashboard.putNumber("shooter Right", measuredUnitsTorpm(rightShooter.getSensorCollection().getQuadratureVelocity()));
+              
+    if (roulingRightValues.size() > roulingAVGLength) {
+      roulingRightValues.remove(0);
+    }
+
+    if (roulingLeftValues.size() != 0 && roulingRightValues.size() != 0) {
+      
+
+      SmartDashboard.putNumber("avg shooter Left",roulingLeftValues.stream().reduce(0.0, (subtotal, element) -> subtotal + element) / roulingLeftValues.size());
+      
+      // SmartDashboard.putNumber("shooter Left v", leftEncoder.getVelocity());
+
+      SmartDashboard.putNumber("avg shooter Right", roulingRightValues.stream().reduce(0.0, (subtotal, element) -> subtotal + element) / roulingRightValues.size());
+
+    }
+    // // SmartDashboard.putNumber("shooter Left",measuredUnitsTorpm(leftShooter.getSensorCollection().getQuadratureVelocity()));
+
+    // // SmartDashboard.putNumber("shooter Right", measuredUnitsTorpm(rightShooter.getSensorCollection().getQuadratureVelocity()));
 
   }
 
@@ -130,8 +153,14 @@ public class Shooter extends Subsystem {
 
       if (isForward)
       {
+        // old fixed power setting
         // m_shooterMotors.set(MotorConfigs.shooterSpeed);
-        // leftShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));
+
+        //calebration testing
+        // m_shooterMotors.set(0.9);
+
+        // pid setting
+        leftShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));
         rightShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));
       }
       else

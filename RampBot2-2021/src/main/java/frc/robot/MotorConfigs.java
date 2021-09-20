@@ -34,7 +34,7 @@ public class MotorConfigs
     public static final double shooterSpeed = 0.8;
 
     // in rpm
-    public static final double shooterTargetVel = 14000; //8587;
+    public static final double shooterTargetVel = 16000; //8587;
 
     // Collections Configs
     public static final double maxCollectorAngle = 202.6;
