@@ -70,9 +70,11 @@ public class Shooter extends Subsystem {
 
     // leftShooter.setSensorPhase(true);
 //TODO: extract coeficients to constants
-    leftShooter.config_kP(0, 0.011);
-    leftShooter.config_kI(0, 0.00002);
-    leftShooter.config_kD(0, 0.00);
+    leftShooter.config_kP(0, 0.015);
+    leftShooter.config_kI(0, 0.00004);
+    leftShooter.config_IntegralZone(0, 5000);
+    leftShooter.config_kD(0, 0.3);
+    leftShooter.config_kF(0, MotorConfigs.leftShooterKf);
 
 
     //rightShooter.configre
@@ -80,11 +82,11 @@ public class Shooter extends Subsystem {
     rightShooter.configSelectedFeedbackSensor(TalonSRXFeedbackDevice.QuadEncoder, 0, 150);
     rightShooter.selectProfileSlot(0, 0);
 
-    rightShooter.config_kP(0, 0.011);
-    rightShooter.config_kI(0, 0.00002);
-    rightShooter.config_kD(0, 0.00);
-    
-    
+    rightShooter.config_kP(0, 0.015);
+    rightShooter.config_kI(0, 0.00004);
+    rightShooter.config_IntegralZone(0, 5000);
+    rightShooter.config_kD(0, 0.3);
+    rightShooter.config_kF(0, MotorConfigs.rightShooterKf);
 
     // Configuration for the encoders
     //m_LiftEncoder.setDistancePerPulse(mm_per_turn / pulses_per_revolution);
@@ -100,7 +102,7 @@ public class Shooter extends Subsystem {
     // This method will be called once per scheduler run
     double leftv = measuredUnitsTorpm(leftShooter.getSelectedSensorVelocity());
     double rightv = measuredUnitsTorpm(rightShooter.getSelectedSensorVelocity());
-       
+
     SmartDashboard.putNumber("shooter Left",leftv);
     SmartDashboard.putNumber("shooter Right", rightv);
     
@@ -157,7 +159,7 @@ public class Shooter extends Subsystem {
         // m_shooterMotors.set(MotorConfigs.shooterSpeed);
 
         //calebration testing
-        // m_shooterMotors.set(0.9);
+        // m_shooterMotors.set(0.8);
 
         // pid setting
         leftShooter.set(ControlMode.Velocity, rpmtoMeasuredUnits(MotorConfigs.shooterTargetVel));

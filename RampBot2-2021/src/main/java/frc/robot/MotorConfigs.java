@@ -32,9 +32,11 @@ public class MotorConfigs
     // Shooter Configs
     // Best is 0.93
     public static final double shooterSpeed = 0.8;
-
     // in rpm
-    public static final double shooterTargetVel = 16000; //8587;
+    public static final double shooterTargetVel = 14000; //8587;
+
+    public static final double leftShooterKf = 8.06314316E-3;
+    public static final double rightShooterKf = 7.662201998E-3;
 
     // Collections Configs
     public static final double maxCollectorAngle = 202.6;
