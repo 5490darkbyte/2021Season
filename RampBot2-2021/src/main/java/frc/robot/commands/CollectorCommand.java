@@ -22,8 +22,11 @@ public class CollectorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {    	
-        c++;
+        
+        // rotate controls
         Robot.m_Collector.rotateCollector(Robot.m_oi.getXbox());
+
+        // spin control
         if (Robot.m_oi.getXbox().getX()>0.2)
         {
             Robot.m_Collector.spinWheels();

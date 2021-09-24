@@ -1,13 +1,13 @@
 package frc.robot.subsystems;
 
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-
+import edu.wpi.first.wpilibj.controller.PIDController;
 import frc.robot.RobotMap;
 import frc.robot.MotorConfigs;
 
 import com.ctre.phoenix.motorcontrol.can.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpiutil.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 
 import frc.robot.commands.CollectorCommand;
@@ -23,7 +23,7 @@ public class Collector extends Subsystem
 
     CANCoder encoder = new CANCoder(RobotMap.collectorEncoder);
 
-    
+    PIDController collectorController = new PIDController(0.004, 0.001, 0.00005*0);
     
 
     //DigitalInput upLimitSwitch = new DigitalInput(RobotMap.mtrLift());
@@ -42,7 +42,7 @@ public class Collector extends Subsystem
 		motorWheels.enableCurrentLimit(true);	
         motorWheels.configOpenloopRamp(0, 0);
 
-        
+        collectorController.setIntegratorRange(-25, 25);
     }
 
     @Override
@@ -54,6 +54,17 @@ public class Collector extends Subsystem
     {
         
         setDefaultCommand(new CollectorCommand());
+    }
+
+    public void rotateCollectorPIDTick(double angle) {
+        
+        if ( getEncoderPosition() > MotorConfigs.maxCollectorAngle + 10)
+        {
+            motor.set(0);
+        }
+        else {
+            motor.set(MathUtil.clamp(collectorController.calculate(getEncoderPosition(), angle),-0.3,0.3));
+        }
     }
 
     public void rotateCollector(Joystick xbox)
@@ -98,5 +109,12 @@ public class Collector extends Subsystem
     public double getEncoderPosition()
     {
         return encoder.getPosition();
+    }
+    public double getEncoderVelocit() {
+        return encoder.getVelocity();
+    }
+
+    public boolean limitSeitchActive() {
+        return motor.getSensorCollection().isRevLimitSwitchClosed();
     }
 }
