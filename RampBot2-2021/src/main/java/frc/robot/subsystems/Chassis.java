@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpiutil.math.MathUtil;
 
 // this is for the Talon SRX version
 //import edu.wpi.first.wpilibj.Talon;
@@ -32,6 +33,7 @@ import frc.robot.commands.DriveRobot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.AnalogInput;
 
 
@@ -72,6 +74,13 @@ public class Chassis extends Subsystem {
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
 	
+	PIDController linearControllerl = new PIDController(0.001, 0, 0);
+	PIDController linearControllerr = new PIDController(0.001, 0, 0);
+
+	public Chassis() {
+		m_left.setInverted(true);
+	}
+
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
     
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
@@ -93,6 +102,13 @@ public class Chassis extends Subsystem {
     // here. Call these from Commands.
 	// see DriveTrain example
 
+	@Override
+	public void periodic() {
+		// TODO Auto-generated method stub
+		super.periodic();
+
+		plotPoses();
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -259,7 +275,6 @@ public class Chassis extends Subsystem {
 		SmartDashboard.putNumber("Velocity Right", rightDriveEncoder.getVelocity());
 		SmartDashboard.putNumber("Absolute Position", leftDriveEncoder.getAbsolutePosition());
 		SmartDashboard.putNumber("Velocity", leftDriveEncoder.getVelocity());
-		
 
 	}
 	
@@ -316,8 +331,36 @@ public class Chassis extends Subsystem {
 	
 	}
 
+	private double calibratedStartLeft = 0;
+	private double calibratedStartRight = 0;
+	
+	public void linearActuatePIDReset() {
+		calibratedStartLeft = leftDriveEncoder.getPosition();
+		calibratedStartRight = rightDriveEncoder.getPosition();
+		linearControllerl.reset();
+		linearControllerr.reset();
+	}
+
+	public void moveLinearPID(double distance) {
+		double lspeed = MathUtil.clamp(linearControllerl.calculate(leftDriveEncoder.getPosition() - calibratedStartLeft, distance),-0.3,0.3);
+		double rspeed = MathUtil.clamp(linearControllerr.calculate(rightDriveEncoder.getPosition() - calibratedStartRight, distance),-0.3,0.3);
+
+		m_left.set(lspeed);
+		m_right.set(rspeed);
+	}
+
+	public void plotPoses() {
+		// for forward left spin CCW and right spin CW	
+		SmartDashboard.putNumber("leftDrivePos", leftDriveEncoder.getPosition());
+		SmartDashboard.putNumber("RightDrivePos", rightDriveEncoder.getPosition());
+		
+		SmartDashboard.putNumber("leftDriveVel", leftDriveEncoder.getVelocity());
+		SmartDashboard.putNumber("RightDriveVel", rightDriveEncoder.getVelocity());
+	}
+
 	public double getBusVoltage()
 	{
 		return rightDriveEncoder.getBusVoltage();
 	}
+
 }

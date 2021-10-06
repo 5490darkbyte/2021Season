@@ -15,7 +15,7 @@ public class FullRetractCollectorPID extends Command {
     // addRequirements(Robot.m_Collector);
   }
 
-  private double setAngle = 60.0;
+  private double setAngle = 0.0;
 
   // Called when the command is initially scheduled.
   @Override
@@ -27,12 +27,13 @@ public class FullRetractCollectorPID extends Command {
   @Override
   public void execute() {
     Robot.m_Collector.rotateCollectorPIDTick(setAngle);
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end() {
-    
+    Robot.m_Collector.rotateCollectorPIDReset();
   }
 
   // Returns true when the command should end.

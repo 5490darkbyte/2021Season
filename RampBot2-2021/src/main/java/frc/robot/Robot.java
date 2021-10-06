@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import sun.misc.Timer;
 import frc.robot.ball;
+import frc.robot.commands.Autonomus2;
 import frc.robot.commands.DriveRobot;
 //import frc.robot.commands.GripperOpen;
 //import frc.robot.commands.LiftDown;
@@ -97,6 +98,7 @@ public class Robot extends TimedRobot {
 	public static Collector m_Collector;
 	
 	Command m_autonomousCommand;
+	Command m_autonomus2;
 	//SendableChooser<Command> m_chooser = new SendableChooser<>();
 	
 
@@ -132,6 +134,7 @@ public class Robot extends TimedRobot {
 		m_oi = new OI();
 		
 		m_autonomousCommand = new DriveRobot();
+		m_autonomus2 = new Autonomus2();
 		
 		
 		pixycam = Pixy2.createInstance(Pixy2.LinkType.SPI);
@@ -200,6 +203,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		m_autonomus2.start();
+
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}

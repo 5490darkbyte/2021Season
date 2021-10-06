@@ -23,7 +23,7 @@ public class Collector extends Subsystem
 
     CANCoder encoder = new CANCoder(RobotMap.collectorEncoder);
 
-    PIDController collectorController = new PIDController(0.004, 0.001, 0.00005*0);
+    PIDController collectorController = new PIDController(0.005, 0.003, 0.00002);
     
 
     //DigitalInput upLimitSwitch = new DigitalInput(RobotMap.mtrLift());
@@ -42,7 +42,7 @@ public class Collector extends Subsystem
 		motorWheels.enableCurrentLimit(true);	
         motorWheels.configOpenloopRamp(0, 0);
 
-        collectorController.setIntegratorRange(-25, 25);
+        collectorController.setIntegratorRange(-05, 05);
     }
 
     @Override
@@ -63,8 +63,13 @@ public class Collector extends Subsystem
             motor.set(0);
         }
         else {
-            motor.set(MathUtil.clamp(collectorController.calculate(getEncoderPosition(), angle),-0.3,0.3));
+            motor.set(MathUtil.clamp(collectorController.calculate(getEncoderPosition(), angle),-0.15,0.15));
         }
+    }
+
+    public void rotateCollectorPIDReset() {
+        collectorController.reset();
+        System.out.print("reset controller");
     }
 
     public void rotateCollector(Joystick xbox)
