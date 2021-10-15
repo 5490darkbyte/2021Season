@@ -75,6 +75,10 @@ public class OI {
 	private JoystickButton button11;
 	private JoystickButton button12;
 	
+	public JoystickButton getButton5() {
+		return button5;
+	}
+
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a
 	//// joystick.

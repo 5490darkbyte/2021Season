@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.sensors.CANCoder;
 
 import frc.robot.MySpeedControllerGroup;
-
+import frc.robot.Robot;
 import edu.wpi.first.wpilibj.Servo;
 
 import edu.wpi.first.wpilibj.drive.*;
@@ -75,14 +75,9 @@ public class Chassis extends Subsystem {
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
 	
-	PIDController linearControllerl = new PIDController(0.003, 0.00025, 0.0001);
-	PIDController linearControllerr = new PIDController(0.003, 0.00025, 0.0001);
 
 	public Chassis() {
 		// m_left.setInverted(true);
-
-		linearControllerl.setIntegratorRange(-5, 5);
-		linearControllerr.setIntegratorRange(-5,5);
 	}
 
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
@@ -234,7 +229,15 @@ public class Chassis extends Subsystem {
 		m_robotDrive.driveCartesian(Xout, Yout, Zout, 0);
 		*/
 		
-		m_robotDrive.arcadeDrive(speed*driveStick.getY(), -speed*driveStick.getX());
+		double zRot = -speed*driveStick.getX();
+
+		if (Robot.m_oi.getButton5().get()) {
+			zRot *= 0.2;
+		}
+
+		SmartDashboard.putBoolean("buttonPressed", Robot.m_oi.getButton5().get());
+
+		m_robotDrive.arcadeDrive(speed*driveStick.getY(),zRot);
 		
 		
 	}
@@ -335,26 +338,21 @@ public class Chassis extends Subsystem {
 	
 	}
 
-	private double calibratedStartLeft = 0;
-	private double calibratedStartRight = 0;
-	
-	public void linearActuatePIDReset() {
-		calibratedStartLeft = leftDriveEncoder.getPosition();
-		calibratedStartRight = rightDriveEncoder.getPosition();
-		linearControllerl.reset();
-		linearControllerr.reset();
+
+	public void setLeft(double speed) {
+		m_left.set(speed);
 	}
 
-	public void moveLinearPID(double distance) {
-		double maxSpeed = 0.15;
-		double lspeed = -MathUtil.clamp(linearControllerl.calculate(-(leftDriveEncoder.getPosition() - calibratedStartLeft), distance),-maxSpeed,maxSpeed);
-		double rspeed = MathUtil.clamp(linearControllerr.calculate(rightDriveEncoder.getPosition() - calibratedStartRight, distance),-maxSpeed,maxSpeed);
+	public void setRight(double speed) {
+		m_right.set(speed);
+	}
 
-		SmartDashboard.putNumber("leftDriveError", linearControllerl.getPositionError());
-		SmartDashboard.putNumber("RightDriveError", linearControllerr.getPositionError());
-		// ADIS16448_IMU
-		m_left.set(lspeed);
-		m_right.set(rspeed);
+	public double getLeftEncoderPosition() {
+		return leftDriveEncoder.getPosition();
+	}
+
+	public double getRightEncoderPosition() {
+		return rightDriveEncoder.getPosition();
 	}
 
 	public void plotPoses() {
