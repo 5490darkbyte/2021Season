@@ -20,10 +20,15 @@ public class Autonomus2 extends Command {
     Robot.m_Chassis.linearActuatePIDReset();
   }
 
+
+  double rotToNative() {
+    return 360*4.0/3.0;
+  }
+
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.m_Chassis.moveLinearPID(360*2);
+    Robot.m_Chassis.moveLinearPID(rotToNative()*4);
   }
 
   // Make this return true when this Command no longer needs to run execute()

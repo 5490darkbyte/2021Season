@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.analog.adis16448.frc.ADIS16448_IMU;
 import com.ctre.phoenix.motorcontrol.can.*;
 import com.ctre.phoenix.sensors.CANCoder;
 
@@ -74,11 +75,14 @@ public class Chassis extends Subsystem {
 
 	DifferentialDrive m_robotDrive = new DifferentialDrive(m_left, m_right);
 	
-	PIDController linearControllerl = new PIDController(0.001, 0, 0);
-	PIDController linearControllerr = new PIDController(0.001, 0, 0);
+	PIDController linearControllerl = new PIDController(0.003, 0.00025, 0.0001);
+	PIDController linearControllerr = new PIDController(0.003, 0.00025, 0.0001);
 
 	public Chassis() {
-		m_left.setInverted(true);
+		// m_left.setInverted(true);
+
+		linearControllerl.setIntegratorRange(-5, 5);
+		linearControllerr.setIntegratorRange(-5,5);
 	}
 
 	// Set the drive to whichever one we are using.  For 2021 we use Tank
@@ -342,9 +346,13 @@ public class Chassis extends Subsystem {
 	}
 
 	public void moveLinearPID(double distance) {
-		double lspeed = MathUtil.clamp(linearControllerl.calculate(leftDriveEncoder.getPosition() - calibratedStartLeft, distance),-0.3,0.3);
-		double rspeed = MathUtil.clamp(linearControllerr.calculate(rightDriveEncoder.getPosition() - calibratedStartRight, distance),-0.3,0.3);
+		double maxSpeed = 0.15;
+		double lspeed = -MathUtil.clamp(linearControllerl.calculate(-(leftDriveEncoder.getPosition() - calibratedStartLeft), distance),-maxSpeed,maxSpeed);
+		double rspeed = MathUtil.clamp(linearControllerr.calculate(rightDriveEncoder.getPosition() - calibratedStartRight, distance),-maxSpeed,maxSpeed);
 
+		SmartDashboard.putNumber("leftDriveError", linearControllerl.getPositionError());
+		SmartDashboard.putNumber("RightDriveError", linearControllerr.getPositionError());
+		// ADIS16448_IMU
 		m_left.set(lspeed);
 		m_right.set(rspeed);
 	}
