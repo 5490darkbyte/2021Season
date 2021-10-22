@@ -229,15 +229,17 @@ public class Chassis extends Subsystem {
 		m_robotDrive.driveCartesian(Xout, Yout, Zout, 0);
 		*/
 		
+		double xSpeed = speed*driveStick.getY();
 		double zRot = -speed*driveStick.getX();
 
 		if (Robot.m_oi.getButton5().get()) {
-			zRot *= 0.2;
+			zRot *= 0.9;
+			xSpeed = 0;
 		}
 
 		SmartDashboard.putBoolean("buttonPressed", Robot.m_oi.getButton5().get());
 
-		m_robotDrive.arcadeDrive(speed*driveStick.getY(),zRot);
+		m_robotDrive.arcadeDrive(xSpeed,zRot);
 		
 		
 	}

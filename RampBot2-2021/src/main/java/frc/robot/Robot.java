@@ -181,7 +181,9 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		
+		if (m_autonomus2 != null) {
+			m_autonomus2.cancel();
+		}
 	}
 
 	@Override
