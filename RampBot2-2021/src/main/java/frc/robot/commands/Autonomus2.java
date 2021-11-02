@@ -23,6 +23,9 @@ public class Autonomus2 extends Command {
 
   private Chassis m_Chassis;
 
+  private double timeDelayToStart = 0;
+
+
   public Autonomus2() {
     // Use requires() here to declare subsystem dependencies
     requires(Robot.m_Chassis);
@@ -54,7 +57,11 @@ public class Autonomus2 extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    moveLinearPID(rotToNative()*4);
+    if (timeSinceInitialized() < timeDelayToStart) {
+      return;
+    }
+    // s - theta*r
+    moveLinearPID(rotToNative()*3);
     // runSCurveIncriment();
   }
 
